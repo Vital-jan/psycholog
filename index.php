@@ -56,21 +56,21 @@
         "header"=>"На что рассчитывать?", 
         "text"=>"<p>
             <ul>
-                <li><img class='phone-icon list-img' src='assets/img/ok.png'>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</li>
-                <li><img class='phone-icon list-img' src='assets/img/ok.png'>Здесь вас примут таким, как Вы есть.</li>
-                <li><img class='phone-icon list-img' src='assets/img/ok.png'>Не осудят. Не высмеют. Не дадут оценок и полезных советов.</li>
-                <li><img class='phone-icon list-img' src='assets/img/ok.png'>Не раскроют ваши тайны.</li>
-                <li><img class='phone-icon list-img' src='assets/img/ok.png'>Постараются помочь.</li>
+                <li><img class='phone-icon' src='assets/img/ok.png'>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</li>
+                <li><img class='phone-icon' src='assets/img/ok.png'>Здесь примут таким, как Вы есть.</li>
+                <li><img class='phone-icon' src='assets/img/ok.png'>Не осудят. Не высмеют. Не дадут оценок и полезных советов.</li>
+                <li><img class='phone-icon' src='assets/img/ok.png'>Не раскроют ваши тайны.</li>
+                <li><img class='phone-icon' src='assets/img/ok.png'>Постараются помочь.</li>
                 <li>&nbsp;</li>
-                <li><img class='phone-icon list-img' src='assets/img/close.png'>&quot;На что жалуетесь, голубчик?&quot; - такой вопрос здесь не прозвучит.</li>
-                <li><img class='phone-icon list-img' src='assets/img/close.png'>Избитое &quot;Хотите об этом поговорить?&quot; - Вы здесь тоже не услышите.</li>
-                <li><img class='phone-icon list-img' src='assets/img/close.png'>&quot;Все равно мне никто не поможет&quot; - опыт психотерапевта плюс Ваше желание обязательно дадут результат.</li>
+                <li><img class='phone-icon' src='assets/img/close.png'>&quot;На что жалуетесь, голубчик?&quot; - такой вопрос здесь не прозвучит.</li>
+                <li><img class='phone-icon' src='assets/img/close.png'>Избитое &quot;Хотите об этом поговорить?&quot; - Вы здесь тоже не услышите.</li>
+                <li><img class='phone-icon' src='assets/img/close.png'>&quot;Все равно мне никто не поможет&quot; - опыт психотерапевта плюс Ваше желание обязательно дадут результат.</li>
 
             </ul>
         </br>
          Как сделать первый шаг?
          </br></br>
-         <p class='read-more'>Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав вопрос психологу онлайн.</p>
+         <p class='read-more'>- Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав вопрос психологу онлайн.</p>
  
         </p>
                "),
@@ -78,21 +78,50 @@
         array("menu_item"=>"Поддержка", "type"=>"", "class"=>"", 
         "header"=>"Моя помощь и поддержка", 
         "text"=>"
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
+            </p>
             <div class='flex-blocks'>
-                <div class='specialization'>
+                <div class='flex-blocks__text3 specialization'>
                     <h2>Специализация 1</h2>
                     <ul>
-                        <li>Болячка 1</li>
-                        <li>Болячка 2</li>
-                        <li>Болячка 3</li>
-                        <li>Болячка 4</li>
-                        <li>Болячка 5</li>
-                        <li>Болячка 6</li>
+                        <li>Проблема 1.1</li>
+                        <li>Проблема 1.2</li>
+                        <li>Проблема 1.3</li>
+                        <li>Проблема 1.4</li>
+                        <li>Проблема 1.5</li>
+                        <li>Проблема 1.6</li>
                     </ul>
                 </div>
-                <div class='specialization'><h2>Специализация 2</h2></div>
-                <div class='specialization'><h2>Специализация 3</h2></div>
-            </div>,
+                <div class='flex-blocks__text3 specialization'>
+                    <h2>Специализация 2</h2>
+                    <ul>
+                        <li>Проблема 2.1</li>
+                        <li>Проблема 2.2</li>
+                        <li>Проблема 2.3</li>
+                        <li>Проблема 2.4</li>
+                        <li>Проблема 2.5</li>
+                        <li>Проблема 2.6</li>
+                    </ul>
+                </div>
+                <div class='flex-blocks__text3 specialization'>
+                    <h2>Специализация 3</h2>
+                    <ul>
+                        <li>Проблема 3.1</li>
+                        <li>Проблема 3.2</li>
+                        <li>Проблема 3.3</li>
+                        <li>Проблема 3.4</li>
+                        <li>Проблема 3.5</li>
+                        <li>Проблема 3.6</li>
+                    </ul>
+                </div>
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
+                </p>
         "),
 
         array("menu_item"=>"Отзывы", "type"=>"", "class"=>"", 
@@ -126,6 +155,7 @@
             ")
         );
 ?>
+
 <body>
     <nav>
 
@@ -134,6 +164,7 @@
             <div class="nav__logo__text">
                 <ul>
                     <li>Галина Кравченко</li>
+                    <li class='separator'></li>
                     <li>Практикующий психолог и психотерапевт</li>
                 </ul>
             </div>
@@ -160,13 +191,16 @@
                 $n = 0;
                 foreach($main_content as $key=>$value) {
                     $id = ($value['type'] == 'footer') ? "footer" : "module{$n}";
+                    $separate = '';
+                    if ($value != end($main_content)) $separate = "<li class='separator'></li>";
                     $n++;
+
                     if ($value['menu_item'])
                     echo "
                     <li class='nav__smartmenu__elem' data-id='{$id}'>
                     {$value['menu_item']}
                     </li>
-                    <li class='nav__smartmenu__separator'></li>
+                    {$separate}
                     ";
                 }
                     echo "

@@ -25,6 +25,7 @@ $font_logo: 'helvetica';
 
 $body_min_width: 350px;
 
+$lg: 1200px;
 $md: 1000px;
 $sm: 800px;
 $xs: 640px;
@@ -79,8 +80,9 @@ body {
     align-items: flex-start;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 30px;
 
-    @media (max-width: $sm) {
+    @media (max-width: $md) {
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -94,6 +96,10 @@ body {
         margin-right: 5%;
         text-align: center;
 
+        @media (max-width: $md) {
+            width: 40%;
+            margin-bottom: 20px;
+        }
         @media (max-width: $sm) {
             width: 70%;
             margin-bottom: 20px;
@@ -110,9 +116,27 @@ body {
             width: 100%;
         }
     }
+    .flex-blocks__text3 {
+        width: 30%;
+
+        @media (max-width: $md) {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    }
 
 }
 
+.separator {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, $smartmenu_color, $body_bgc, transparent);
+    margin: 2px 0;
+    list-style-type: none;
+    // &:last-child {
+    //     display: none;
+    // }
+}
 
 #home-arrow {
     border-radius: 50%;
@@ -225,16 +249,15 @@ nav {
     .nav__elem {
         @extend %nav-elements;
         // дополнительный стиль (плавный underline)
-            border-bottom: 15px solid transparent;
-            padding-bottom: 0;
+            border-bottom: 8px solid transparent;
             height: 10px;
             &:hover {
-                border-bottom: 15px solid $nav_underline;
+                border-bottom: 8px solid $nav_underline;
                 color: $nav_active_text;
                 transition-duration: .5s;
             }
 
-        padding: 10px;
+        padding: 0 10px 15px;
         @media (max-width: $md) {
             display: none;
         }
@@ -283,17 +306,8 @@ nav {
             color: $smartmenu_color;
             font-weight: bold;
             list-style-type: none;
+            margin: 10px 0;
             cursor: pointer;
-        }
-        .nav__smartmenu__separator {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, $smartmenu_color, $body_bgc, transparent);
-            margin: 12px 0;
-            list-style-type: none;
-            &:last-child {
-                display: none;
-            }
         }
         .nav__smartmenu__close {
             text-align: right;
@@ -345,20 +359,25 @@ main {
 
     .main__module {
         
-        width: 75%;
+        width: 100%;
         margin: 120px auto;
         padding: 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-start;
+        padding: 0 15%;
 
-        @media (max-width: $md) {
-            width: 95%;
+        @media (max-width: $lg) {
             margin: 50px auto;
+            padding: 0 8%;
+        }
+        @media (max-width: $md) {
+            margin: 50px auto;
+            padding: 0 2.5%;
         }
         @media (max-width: $sm) {
-            width: 95%;
+            padding: 0 2.5%;
             margin: 20px auto;
         }
 
@@ -367,7 +386,7 @@ main {
             color: $header_text;
             font-size: 1.5rem;
             font-family: $font_header;
-            padding: 5px 0 5px 50px;
+            padding: 25px 0 25px 50px;
             margin-bottom: 40px;
             margin-left: -50px;
             background: linear-gradient(to right, $header-bgc, transparent);
@@ -405,7 +424,6 @@ main {
             }
 
             img {
-                // max-width: 100%;
                 
                 margin: 0;
                 height: auto;
@@ -475,6 +493,10 @@ main {
                 width: 100%;
                 margin: 0;
                 margin-bottom: 20px;
+                text-align: justify;
+                @media (max-width: $md) {
+                    text-align: left;
+                }
             }
 
             b {
@@ -491,7 +513,6 @@ main {
             padding: 0;
         }
         
-
     } // main__module
 } // main
 
@@ -665,10 +686,6 @@ footer {
 
 .specialization {
     background-color: $body_bgc;
-    width: 30%;
     height: 100%;
-}
-
-.list-img {
-    left: -20px;
+    padding: 10px;
 }
