@@ -19,18 +19,13 @@
 <?
 
     $main_content = array( // масив, що формує контент сайту
-        // type = ["", "full-width", "full-width-center", "footer"]
-        // "" - звичайний модуль, йому додається клас .main__module
-        // "full-width" - модуль на повну ширину екрану, йому додається клас .main__module_full-width
-        // "full-width-center" - модуль на повну ширину екрану відцентрований, йому додається клас .main__module_full-width .center
-        // "footer" - розділ <footer>
 
-        array("menu_item"=>"Про меня", "type"=>"", "class"=>"",
+        array("menu_item"=>"Про меня",
         "header"=>"Про меня", 
         "text"=>"
-        <div class='flex-blocks'>
-        <div class='flex-blocks__img'><img src='assets/img/photo.jpg'></div>
-        <div class='flex-blocks__text'>
+        <div class='flex-blocks about'>
+        <div class='about__img'><img src='assets/img/photo.jpg'></div>
+        <div class='about__text'>
             <p>
                 Галина Кравченко. Практикующий психолог и психотерапевт. Член ассоциации практикующих психологов и психотерапевтов Украины.
             </p>
@@ -38,11 +33,14 @@
                 Психотерапевтической практикой занимаюсь с 1992 года. На моем опыте ........
             </p>
             <p>
-                Провожу консультации в Киеве, в центре города, недалеко от Софиевской площади.
+                Мои консультации проходят в Киеве, в центре города, недалеко от Софиевской площади.
             </p>
-            <div class='read-more education'>
+            <p>
+                Провожу индивидуальные консультации и <span class='action'>корпоративные треннинги</span>.
+            </p>
+            <div class='read-more'>
                 <ul>
-                <img src='assets/img/experience.png'>
+                <img class='about__education__img' src='assets/img/experience.png'>
                 <li>Киевский государственный университет 1995-2000 (5 лет, магистр)</li>
                 <li>Украинский национальный ... 1990-1995 (5 лет, магистр)</li>
                 <li>..............................</li>
@@ -52,8 +50,14 @@
         </div>
         "),
         
-        array("menu_item"=>"Главное", "type"=>"", "class"=>"", 
-        "header"=>"<div class='main-info-header'><span>На что рассчитывать</span> <img src='assets/img/quession.png'><img src='assets/img/quession.png'><img src='assets/img/quession.png'></div>", 
+        array("menu_item"=>"Главное", 
+        "header"=>"
+        <div class='flex-blocks flex-blocks_center main-info-header'>
+            <span>На что рассчитывать</span>
+            <div class='flex-blocks flex-blocks_center no-wrap'>
+                <img src='assets/img/quession.png'><img src='assets/img/quession.png'><img src='assets/img/quession.png'>
+            </div>
+        </div>", 
         "text"=>"<p>
             <ul>
                 <li class='list-marker'><img src='assets/img/list-ok.png'><span>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</span></li>
@@ -68,10 +72,10 @@
 
             </ul>
         </br>
-         <h2 class='sub-header'>Как сделать первый шаг?</h2>
-         <div class='read-more'>
+         <h2 class='main__module__sub-header'>Как сделать первый шаг?</h2>
+         <div class='read-more center'>
             <p>- Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав <span class='action'>вопрос психологу</span> онлайн.</p>
-            <div class='center-blocks'>
+            <div class='flex-blocks flex-blocks_center'>
                 <img src='assets/img/step.png' style='height: 250px'>
                 <div class='action-button first'>Вопрос психологу &raquo;</div>
             </div>
@@ -79,9 +83,9 @@
         </p>
                "),
 
-        array("menu_item"=>"Поддержка", "type"=>"", "class"=>"", 
+        array("menu_item"=>"Поддержка", 
         "header"=>"
-            <div class='help center-blocks'>
+            <div class='help'>
                 <span>Помощь и поддержка</span>
             </div>
         ", 
@@ -90,7 +94,7 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
             </p>
             <div class='flex-blocks'>
-                <div class='flex-blocks__text3 specialization'>
+                <div class='flex-blocks-3 specialization'>
                 <div class='img'><img src='assets/img/head1.png'></div>
                 <h2>Специализация 1</h2>
                 <ul>
@@ -102,7 +106,7 @@
                 <li class='action'>Проблема 1.6</li>
                 </ul>
                 </div>
-                <div class='flex-blocks__text3 specialization'>
+                <div class='flex-blocks-3 specialization'>
                     <div class='img'><img src='assets/img/head2.png'></div>
                     <h2>Специализация 2</h2>
                     <ul>
@@ -114,7 +118,7 @@
                         <li class='action'>Проблема 2.6</li>
                     </ul>
                 </div>
-                <div class='flex-blocks__text3 specialization'>
+                <div class='flex-blocks-3 specialization'>
                 <div class='img'><img src='assets/img/head3.png'></div>
 
                     <h2>Специализация 3</h2>
@@ -144,23 +148,23 @@
                 </p>
         "),
 
-        array("menu_item"=>"Отзывы", "type"=>"", "class"=>"", 
+        array("menu_item"=>"Отзывы", 
         "header"=>"Отзывы и рекомендации",
         "text"=>"
         <p>
         </p>
         "),
 
-        array("menu_item"=>"", "type"=>"", "class"=>"",
+        array("menu_item"=>"",
         "header"=>"",
         "text"=>"
-            <div class='module_action'>
+            <div class='flex-blocks'>
                 <div class='action-button'><span>Вопрос психологу &raquo;</span></div>
                 <div class='action-button quickly'><span>Срочая помощь &raquo;</span></div>
             </div>
             "),
 
-        array("menu_item"=>"Контакты", "type"=>"footer", "class"=>"",
+        array("menu_item"=>"Контакты", "type"=>"footer",
         "header"=>"Связаться со мной можно:",
         "text"=>"
         <ul>
@@ -185,7 +189,7 @@
                 <ul>
                     <li>Галина Кравченко</li>
                     <li class='separator'></li>
-                    <li>Практикующий психолог и психотерапевт</li>
+                    <li><h1>Практикующий психолог и психотерапевт</h1></li>
                 </ul>
             </div>
         </div>
@@ -199,7 +203,7 @@
                     $n++;
                     if ($value['menu_item'])
                     echo "
-                    <span class='nav__elem' data-id='{$id}'>{$value['menu_item']}</span>
+                    <span class='nav__elem action' data-id='{$id}'>{$value['menu_item']}</span>
                     ";
                 }
             // створюємо смарт-меню
@@ -241,15 +245,10 @@
                 if ($value['type'] == 'footer') continue;
                 $id = "module{$n}";
                 $class = "main__module";
-                if ($value["type"] == 'full-width') $class .= ' main__module_full-width';
-                if ($value["type"] == 'full-width-center') $class .= ' main__module_full-width center';
                 if ($value['class']) $class .= ' '.$value['class'];
 
-                $h12 = ($n == 0) ? 'h1' : 'h2';
                 $sub = $value['menu_item'] ? '' : 'sub-';
-                $header = $value['header'] ? "<{$h12} class='main__module__{$sub}header'>{$value['header']}</{$h12}>" : "";
-                $img1 = $value['img1'] ? "<div class='main__module__content__img1'><img src='{$value['img1']}'></div>" : '';
-                $img2 = $value['img2'] ? "<div class='main__module__content__img2'><img src='{$value['img2']}'></div>" : '';
+                $header = $value['header'] ? "<h2 class='main__module__{$sub}header'>{$value['header']}</h2>" : "";
                 echo "
                 <div class='{$class}' id='{$id}'>
                     {$header}
@@ -299,6 +298,7 @@
         document.querySelectorAll('.read-more').forEach((i)=>{ // створюємо кнопки "Read more" для всіх елементів з відповідним класом
             let btn = document.createElement('button');
             $(btn).insertAfter(i);
+            if (i.classList.contains('center')) btn.classList.add('center');
             btn.classList.add('read-more-button');
             btn.setAttribute('data-readmore','true');
         })
