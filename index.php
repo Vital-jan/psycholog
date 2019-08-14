@@ -32,17 +32,17 @@
         <div class='flex-blocks__img'><img src='assets/img/photo.jpg'></div>
         <div class='flex-blocks__text'>
             <p>
-                Галина Кравченко. Практикующий психолог и психотерапевт. Психоаналитик. Член ассоциации практикующих психологов и психотерапевтов Украины.
+                Галина Кравченко. Практикующий психолог и психотерапевт. Член ассоциации практикующих психологов и психотерапевтов Украины.
             </p>
             <p>
-                Психотерапией занимаюсь с 1992 года. На моем опыте ........
+                Психотерапевтической практикой занимаюсь с 1992 года. На моем опыте ........
             </p>
             <p>
                 Провожу консультации в Киеве, в центре города, недалеко от Софиевской площади.
             </p>
             <div class='read-more education'>
                 <ul>
-                <h2>Образование:</h2>
+                <img src='assets/img/experience.png'>
                 <li>Киевский государственный университет 1995-2000 (5 лет, магистр)</li>
                 <li>Украинский национальный ... 1990-1995 (5 лет, магистр)</li>
                 <li>..............................</li>
@@ -53,30 +53,38 @@
         "),
         
         array("menu_item"=>"Главное", "type"=>"", "class"=>"", 
-        "header"=>"На что рассчитывать?", 
+        "header"=>"<div class='main-info-header'><span>На что рассчитывать</span> <img src='assets/img/quession.png'><img src='assets/img/quession.png'><img src='assets/img/quession.png'></div>", 
         "text"=>"<p>
             <ul>
-                <li><img class='phone-icon' src='assets/img/ok.png'>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</li>
-                <li><img class='phone-icon' src='assets/img/ok.png'>Здесь примут таким, как Вы есть.</li>
-                <li><img class='phone-icon' src='assets/img/ok.png'>Не осудят. Не высмеют. Не дадут оценок и полезных советов.</li>
-                <li><img class='phone-icon' src='assets/img/ok.png'>Не раскроют ваши тайны.</li>
-                <li><img class='phone-icon' src='assets/img/ok.png'>Постараются помочь.</li>
+                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</span></li>
+                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Здесь примут таким, как Вы есть.</span></li>
+                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Не осудят. Не высмеют. Не дадут оценок и полезных советов.</span></li>
+                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Не раскроют Ваши тайны.</span></li>
+                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Постараются помочь.</span></li>
                 <li>&nbsp;</li>
-                <li><img class='phone-icon' src='assets/img/close.png'>&quot;На что жалуетесь, голубчик?&quot; - такой вопрос здесь не прозвучит.</li>
-                <li><img class='phone-icon' src='assets/img/close.png'>Избитое &quot;Хотите об этом поговорить?&quot; - Вы здесь тоже не услышите.</li>
-                <li><img class='phone-icon' src='assets/img/close.png'>&quot;Все равно мне никто не поможет&quot; - опыт психотерапевта плюс Ваше желание обязательно дадут результат.</li>
+                <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>&laquo;На что жалуетесь, голубчик?&raquo; - такой вопрос здесь не прозвучит.</span></li>
+                <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>Избитое &laquo;Хотите об этом поговорить?&raquo; - Вы здесь тоже не услышите.</span></li>
+                <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>&laquo;Все равно мне никто не поможет&raquo; - Ваше желание + опыт психотерапевта обязательно дадут результат.</span></li>
 
             </ul>
         </br>
-         Как сделать первый шаг?
-         </br></br>
-         <p class='read-more'>- Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав вопрос психологу онлайн.</p>
- 
+         <h2 class='sub-header'>Как сделать первый шаг?</h2>
+         <div class='read-more'>
+            <p>- Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав <span class='action'>вопрос психологу</span> онлайн.</p>
+            <div class='center-blocks'>
+                <img src='assets/img/step.png' style='height: 250px'>
+                <div class='action-button first'>Вопрос психологу &raquo;</div>
+            </div>
+        </div>
         </p>
                "),
 
         array("menu_item"=>"Поддержка", "type"=>"", "class"=>"", 
-        "header"=>"Моя помощь и поддержка", 
+        "header"=>"
+            <div class='help center-blocks'>
+                <span>Помощь и поддержка</span>
+            </div>
+        ", 
         "text"=>"
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
@@ -135,8 +143,8 @@
         "header"=>"",
         "text"=>"
             <div class='module_action'>
-                <div class='action'><span>Вопрос психологу &raquo;</span></div>
-                <div class='action quickly'><span>Срочая помощь &raquo;</span></div>
+                <div class='action-button'><span>Вопрос психологу &raquo;</span></div>
+                <div class='action-button quickly'><span>Срочая помощь &raquo;</span></div>
             </div>
             "),
 
@@ -145,13 +153,13 @@
         "text"=>"
         <ul>
             <li>
-                <a href='tel:+380958964399'><img class='phone-icon' src='assets/img/phone.png'>
-                +38 (095) 8964399</a>
-            </li>
-            <li>
                 <a href='mailto:kravchenko.galina@outlook.com'><img class='phone-icon' src='assets/img/email.png'>
                 kravchenko.galina@outlook.com</a>
             </li>
+            <li>
+                Галина Кравченко. Психотерапевт. Украина, г.Киев
+            </li>
+        </ul>
             ")
         );
 ?>
@@ -384,7 +392,7 @@ window.onscroll = ()=>{
         }
 // ---------------------------------------------------------------------------------- кінець шаблону сайту
 
-document.querySelectorAll('.action').
+document.querySelectorAll('.action-button').
 forEach((i)=>{
     i.addEventListener('mouseenter', (event)=>{
         $(event.target).animate({top: '+=5px'}, 50).animate({top: '-=5px'}, 50);
