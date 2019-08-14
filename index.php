@@ -91,36 +91,40 @@
             </p>
             <div class='flex-blocks'>
                 <div class='flex-blocks__text3 specialization'>
-                    <h2>Специализация 1</h2>
-                    <ul>
-                        <li>Проблема 1.1</li>
-                        <li>Проблема 1.2</li>
-                        <li>Проблема 1.3</li>
-                        <li>Проблема 1.4</li>
-                        <li>Проблема 1.5</li>
-                        <li>Проблема 1.6</li>
-                    </ul>
+                <div class='img'><img src='assets/img/head1.png'></div>
+                <h2>Специализация 1</h2>
+                <ul>
+                <li class='action'>Проблема 1.1</li>
+                <li class='action'>Проблема 1.2</li>
+                <li class='action'>Проблема 1.3</li>
+                <li class='action'>Проблема 1.4</li>
+                <li class='action'>Проблема 1.5</li>
+                <li class='action'>Проблема 1.6</li>
+                </ul>
                 </div>
                 <div class='flex-blocks__text3 specialization'>
+                    <div class='img'><img src='assets/img/head2.png'></div>
                     <h2>Специализация 2</h2>
                     <ul>
-                        <li>Проблема 2.1</li>
-                        <li>Проблема 2.2</li>
-                        <li>Проблема 2.3</li>
-                        <li>Проблема 2.4</li>
-                        <li>Проблема 2.5</li>
-                        <li>Проблема 2.6</li>
+                        <li class='action'>Проблема 2.1</li>
+                        <li class='action'>Проблема 2.2</li>
+                        <li class='action'>Проблема 2.3</li>
+                        <li class='action'>Проблема 2.4</li>
+                        <li class='action'>Проблема 2.5</li>
+                        <li class='action'>Проблема 2.6</li>
                     </ul>
                 </div>
                 <div class='flex-blocks__text3 specialization'>
+                <div class='img'><img src='assets/img/head3.png'></div>
+
                     <h2>Специализация 3</h2>
                     <ul>
-                        <li>Проблема 3.1</li>
-                        <li>Проблема 3.2</li>
-                        <li>Проблема 3.3</li>
-                        <li>Проблема 3.4</li>
-                        <li>Проблема 3.5</li>
-                        <li>Проблема 3.6</li>
+                        <li class='action'>Проблема 3.1</li>
+                        <li class='action'>Проблема 3.2</li>
+                        <li class='action'>Проблема 3.3</li>
+                        <li class='action'>Проблема 3.4</li>
+                        <li class='action'>Проблема 3.5</li>
+                        <li class='action'>Проблема 3.6</li>
                     </ul>
                 </div>
                 </div>
@@ -129,6 +133,14 @@
                 </p>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
+                </p>
+                <p class='justify-blocks'>
+                    <span style='width:70%'>Организовываю также групповые и корпоративные треннинги.</span>
+                    <img src='assets/img/human.png'>
+                </p>
+                <p class='justify-blocks'>
+                    <span style='width:70%'>Для тех, кто находится далеко от Киева, психотерапевт предоставляет консультации онлайн при помощи skype.</span>
+                    <img src='assets/img/skype-img.png'>
                 </p>
         "),
 

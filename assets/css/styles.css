@@ -28,6 +28,18 @@ body li {
   list-style-type: none;
 }
 
+.action {
+  border-bottom: 8px solid transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.action:hover {
+  border-bottom: 8px solid rgba(238, 250, 133, 0.2);
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
+}
+
 .hidden-elem {
   display: none !important;
 }
@@ -135,6 +147,18 @@ body li {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.justify-blocks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -705,11 +729,6 @@ footer .footer__content a {
   border-right: 20px solid #e6e6e6;
 }
 
-.action {
-  cursor: pointer;
-  font-weight: bold;
-}
-
 .action-button {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -857,6 +876,15 @@ footer .footer__content a {
   background-color: #ce92bc;
   height: 100%;
   padding: 10px;
+  text-align: center;
+}
+
+.specialization .img {
+  text-align: center;
+}
+
+.specialization .img img {
+  height: 75px !important;
 }
 
 .education img {
