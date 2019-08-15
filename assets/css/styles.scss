@@ -129,7 +129,7 @@ body {
 
 .flex-blocks {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     
     &.flex-blocks_center {
@@ -142,9 +142,9 @@ body {
         align-items: center;
         justify-content: center;
         
-        &>* {
-            margin-bottom: 30px;
-        }
+        // &>* {
+        //     margin-bottom: 30px;
+        // }
 
         &.no-wrap {
             justify-content: space-between;
@@ -301,14 +301,6 @@ nav {
 
     .nav__elem {
         @extend %nav-elements;
-        // дополнительный стиль (плавный underline)
-            // border-bottom: 8px solid transparent;
-            // height: 10px;
-            // &:hover {
-            //     border-bottom: 8px solid $nav_underline;
-            //     color: $nav_active_text;
-            //     transition-duration: .5s;
-            // }
 
         padding: 0 10px 15px;
         @media (max-width: $md) {
@@ -399,9 +391,9 @@ nav {
     &.center {
         margin: auto;
     }
-    &::before {
-        content: "Подробнее ...";
-        z-index: 1;
+    &.right {
+        margin-left: auto;
+        margin-right: 0;
     }
 }
 
@@ -456,6 +448,11 @@ main {
         .main__module__content {
             width: 100%;
             padding: 0 15%;
+
+            &.full-width {
+                padding: 0 5%!important;
+            }
+
             @media (max-width: $lg) {
                 padding: 0 8%;
             }
@@ -567,7 +564,7 @@ footer {
 .action-button {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     background: linear-gradient(to bottom, rgb(226, 213, 28), rgb(241, 237, 170));
     cursor: pointer;
     color: $normal_text;
@@ -578,8 +575,9 @@ footer {
     padding: 20px;
     border-radius: 20px;
     border: 5px solid rgb(226, 213, 28);
+    margin-bottom: 20px;
     @media (max-width: $sm) {
-        width: 50%;
+        width: 60%;
         height: 100px;
     }
     &.quickly {
@@ -706,6 +704,7 @@ footer {
     height: 100%;
     padding: 10px;
     text-align: center;
+    margin-bottom: 20px;
     .img {
         text-align: center;
         img {
@@ -725,8 +724,11 @@ footer {
     justify-content: center;
 
     span {
-        width: 60%;
         display: inline-block;
+        width: 60%;
+        @media (max-width: $md) {
+            width: 80%;
+        }
     }
     img {
         display: block;
@@ -763,7 +765,6 @@ footer {
 
 .help {
     width: 100%;
-    text-align: center;
     height: 100%;
     background-image: url(../img/rain.png);
     background-repeat: no-repeat;

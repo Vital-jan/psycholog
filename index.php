@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Психолог Галина Кравченко. Консультации психотерапевта в Киеве.">
+    <meta name="description" content="Психолог Галина Кравченко. Индивидуальные и семейные консультации психотерапевта в Киеве. Групповые и корпоративные психологические тренинги.">
     <meta name='author' content='Vitalii Kolomiiets, Kyiv, Ukraine, vitaljan@gmail.com viber:+380632209770'>
     <title>Психолог Галина Кравченко (Киев)</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,82 +17,160 @@
 
 
 <?
+    $main_menu = array (
+        array ("menu_item" => "Про меня", "id" => "about"),
+        array ("menu_item" => "Поддержка", "id" => "support"),
+        array ("menu_item" => "Услуги", "id" => "service"),
+        array ("menu_item" => "Отзывы", "id" => "comments"),
+        array ("menu_item" => "Контакты", "id" => "contacts"),
+    );
+?>
 
-    $main_content = array( // масив, що формує контент сайту
+<body>
+    <nav>
 
-        array("menu_item"=>"Про меня",
-        "header"=>"Про меня", 
-        "text"=>"
-        <div class='flex-blocks about'>
-        <div class='about__img'><img src='assets/img/photo.jpg'></div>
-        <div class='about__text'>
-            <p>
-                Галина Кравченко. Практикующий психолог и психотерапевт. Член ассоциации практикующих психологов и психотерапевтов Украины.
-            </p>
-            <p>
-                Психотерапевтической практикой занимаюсь с 1992 года. На моем опыте ........
-            </p>
-            <p>
-                Мои консультации проходят в Киеве, в центре города, недалеко от Софиевской площади.
-            </p>
-            <p>
-                Провожу индивидуальные консультации и <span class='action'>корпоративные треннинги</span>.
-            </p>
-            <div class='read-more'>
+        <div class="nav__logo"> <!-- блок логотип-->
+            <!-- <img src="assets/img/vj.png" alt="CV js developer"> -->
+            <div class="nav__logo__text">
                 <ul>
-                <img class='about__education__img' src='assets/img/experience.png'>
-                <li>Киевский государственный университет 1995-2000 (5 лет, магистр)</li>
-                <li>Украинский национальный ... 1990-1995 (5 лет, магистр)</li>
-                <li>..............................</li>
+                    <li>Галина Кравченко</li>
+                    <li class='separator'></li>
+                    <li><h1>Практикующий психолог и психотерапевт</h1></li>
                 </ul>
             </div>
         </div>
+
+        <div class="nav__menu"> <!-- блок меню -->
+        <?
+            // створюємо головне меню
+                $n = 0;
+                foreach($main_menu as $key=>$value) {
+                    $id = ($value['id']) ? $value['id'] : "module{$n}";
+                    $n++;
+                    if ($value['menu_item'])
+                    echo "
+                    <span class='nav__elem action' data-id='{$id}'>{$value['menu_item']}</span>
+                    ";
+                }
+            // створюємо смарт-меню
+                echo "
+                    <div class='nav__smartmenu'>
+                    <ul>
+                    <li class='nav__smartmenu__close'><span id='nav-smart-menu-close'>&#10006;</span></li>
+                    ";
+                $n = 0;
+                foreach($main_menu as $key=>$value) {
+                    $separate = '';
+                    if ($value != end($main_menu)) $separate = "<li class='separator'></li>";
+                    $n++;
+
+                    $id = $value['id'];
+                    if ($value['menu_item'])
+                    echo "
+                    <li class='nav__smartmenu__elem' data-id='{$id}'>
+                    {$value['menu_item']}
+                    </li>
+                    {$separate}
+                    ";
+                }
+                    echo "
+                </ul>
+                </div>
+                ";
+
+            ?>
         </div>
-        "),
+    </nav>
+
+    <main>
+        <div id="home-arrow" class='hidden-elem'></div>
         
-        array("menu_item"=>"Главное", 
-        "header"=>"
-        <div class='flex-blocks flex-blocks_center main-info-header'>
-            <span>На что рассчитывать</span>
-            <div class='flex-blocks flex-blocks_center no-wrap'>
-                <img src='assets/img/quession.png'><img src='assets/img/quession.png'><img src='assets/img/quession.png'>
+        <div class="main__module" id="about">
+            <div class="main__module__header">
+                Про меня
             </div>
-        </div>", 
-        "text"=>"<p>
-            <ul>
-                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</span></li>
-                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Здесь примут таким, как Вы есть.</span></li>
-                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Не осудят. Не высмеют. Не дадут оценок и полезных советов.</span></li>
-                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Не раскроют Ваши тайны.</span></li>
-                <li class='list-marker'><img src='assets/img/list-ok.png'><span>Постараются помочь.</span></li>
-                <li>&nbsp;</li>
-                <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>&laquo;На что жалуетесь, голубчик?&raquo; - такой вопрос здесь не прозвучит.</span></li>
-                <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>Избитое &laquo;Хотите об этом поговорить?&raquo; - Вы здесь тоже не услышите.</span></li>
-                <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>&laquo;Все равно мне никто не поможет&raquo; - Ваше желание + опыт психотерапевта обязательно дадут результат.</span></li>
+            <div class="main__module__content flex-blocks about">
 
-            </ul>
-        </br>
-         <h2 class='main__module__sub-header'>Как сделать первый шаг?</h2>
-         <div class='read-more center'>
-            <p>- Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав <span class='action'>вопрос психологу</span> онлайн.</p>
-            <div class='flex-blocks flex-blocks_center'>
-                <img src='assets/img/step.png' style='height: 250px'>
-                <div class='action-button first'>Вопрос психологу &raquo;</div>
-            </div>
-        </div>
-        </p>
-               "),
+                <div class='about__img'>
+                    <img src='assets/img/photo.jpg' alt='Галина Кравченко. Психолог. Психотерапевт. Индивидуальные и семейные консультации психолога в Киеве. Корпоративные тренинги. Онлайн консультации психотерапевта.'>
+                </div>
 
-        array("menu_item"=>"Поддержка", 
-        "header"=>"
-            <div class='help'>
-                <span>Помощь и поддержка</span>
+                <div class='about__text'>
+                    <p>
+                        Галина Кравченко. Практикующий психолог и психотерапевт. Член ассоциации практикующих психологов и психотерапевтов Украины.
+                    </p>
+                    <p>
+                        Психотерапевтической практикой занимаюсь с 1992 года. На моем опыте ........
+                    </p>
+                    <p>
+                        Мои консультации проходят в Киеве, в центре города, недалеко от Софиевской площади.
+                    </p>
+                    <p>
+                        Провожу индивидуальные и семейные консультации, <span class='action'>групповые и корпоративные тренинги</span>.
+                    </p>
+                    <div class='read-more' data-text='Подробнее ...'>
+                        <ul>
+                            <img class='about__education__img' src='assets/img/experience.png'>
+                            <li>Киевский государственный университет 1995-2000 (5 лет, магистр)</li>
+                            <li>Украинский национальный ... 1990-1995 (5 лет, магистр)</li>
+                            <li>..............................</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        ", 
-        "text"=>"
+        </div> <!-- main__module -->
+        
+        <div class="main__module" id="support">
+
+            <div class="main__module__header flex-blocks flex-blocks_center main-info-header">
+                <span>На что рассчитывать</span>
+                <div class='flex-blocks flex-blocks_center no-wrap'>
+                    <img src='assets/img/quession.png'><img src='assets/img/quession.png'><img src='assets/img/quession.png'>
+                </div>
+            </div>
+
+            <div class="main__module__content">
+                <p>
+                    <ul>
+                        <li class='list-marker'><img src='assets/img/list-ok.png'><span>Вы идете <strong>не</strong> на исповедь, <strong>не</strong> на суд, и <strong>не</strong> на дружескую беседу.</span></li>
+                        <li class='list-marker'><img src='assets/img/list-ok.png'><span>Здесь примут таким, как Вы есть.</span></li>
+                        <li class='list-marker'><img src='assets/img/list-ok.png'><span>Не осудят. Не высмеют. Не дадут оценок и полезных советов.</span></li>
+                        <li class='list-marker'><img src='assets/img/list-ok.png'><span>Не раскроют Ваши тайны.</span></li>
+                        <li class='list-marker'><img src='assets/img/list-ok.png'><span>Постараются помочь.</span></li>
+                        <li>&nbsp;</li>
+                        <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>&laquo;На что жалуетесь, голубчик?&raquo; - такой вопрос здесь не прозвучит.</span></li>
+                        <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>Избитое &laquo;Хотите об этом поговорить?&raquo; - Вы здесь тоже не услышите.</span></li>
+                        <li class='list-marker'><img class='close'src='assets/img/list-close.png'><span>&laquo;Все равно мне никто не поможет&raquo; - Ваше желание + опыт психотерапевта обязательно дадут результат.</span></li>
+
+                    </ul>
+                    <h2 class='main__module__sub-header'>Как сделать первый шаг?</h2>
+                    <div class='read-more center' data-text="Подробнее &raquo;">
+                        <p>
+                            - Вам не надо готовиться, как к экзамену. Первый шаг Вы можете сделать прямо сейчас, задав <span class='action'>вопрос психологу</span> онлайн.
+                        </p>
+                        <div class='flex-blocks flex-blocks_center'>
+                            <img src='assets/img/step.png' style='height: 250px'>
+                            <div class='action-button first'>Вопрос психологу &raquo;</div>
+                        </div>
+                    </div>
+                </p>
+            </div> <!-- main__module__content -->
+        </div> <!-- main__module -->
+
+        <div class="main__module">
+
+            <div class="main__module__header">
+                <div class="help flex-blocks flex-blocks_center">
+                    <span>Помощь и поддержка</span>
+                </div>
+            </div> <!-- main__module__header -->
+
+            <div class="main__module__content full-width">
+
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
             </p>
+
             <div class='flex-blocks'>
                 <div class='flex-blocks-3 specialization'>
                 <div class='img'><img src='assets/img/head1.png'></div>
@@ -138,150 +216,66 @@
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
                 </p>
+            </div>
+
+        <div class="main__module" id="service">
+            <div class="main__module__header">
+                Услуги психотерапевта
+            </div>
+            <div class="main__module__content">
                 <p class='justify-blocks'>
-                    <span style='width:70%'>Организовываю также групповые и корпоративные треннинги.</span>
+                    <span style='width:70%'>Индивидуальные консультации психотерапевта</span>
+                    <img src='assets/img/single.png'>
+                </p>
+                <p class='justify-blocks'>
+                    <span style='width:70%'>Семейные консультации</span>
+                    <img src='assets/img/family.png'>
+                </p>
+                <p class='justify-blocks'>
+                    <span style='width:70%'>Организовываю групповые и корпоративные психологические тренинги</span>
                     <img src='assets/img/human.png'>
                 </p>
                 <p class='justify-blocks'>
                     <span style='width:70%'>Для тех, кто находится далеко от Киева, психотерапевт предоставляет консультации онлайн при помощи skype.</span>
                     <img src='assets/img/skype-img.png'>
                 </p>
-        "),
+            </div>
+        </div> <!-- main__module -->
+        
+        <div class="main__module" id="comments">
+            <div class="main__module__header">
+                Отзывы и рекомендации.
+            </div>
+            <div class="main__module__content">
 
-        array("menu_item"=>"Отзывы", 
-        "header"=>"Отзывы и рекомендации",
-        "text"=>"
-        <p>
-        </p>
-        "),
-
-        array("menu_item"=>"",
-        "header"=>"",
-        "text"=>"
-            <div class='flex-blocks'>
+            </div>
+        </div> <!-- main__module -->
+        
+        <div class="main__module">
+            <div class="main__module__content flex-blocks">
                 <div class='action-button'><span>Вопрос психологу &raquo;</span></div>
                 <div class='action-button quickly'><span>Срочая помощь &raquo;</span></div>
             </div>
-            "),
-
-        array("menu_item"=>"Контакты", "type"=>"footer",
-        "header"=>"Связаться со мной можно:",
-        "text"=>"
-        <ul>
-            <li>
-                <a href='mailto:kravchenko.galina@outlook.com'><img class='phone-icon' src='assets/img/email.png'>
-                kravchenko.galina@outlook.com</a>
-            </li>
-            <li>
-                Галина Кравченко. Психотерапевт. Украина, г.Киев
-            </li>
-        </ul>
-            ")
-        );
-?>
-
-<body>
-    <nav>
-
-        <div class="nav__logo"> <!-- блок логотип-->
-            <!-- <img src="assets/img/vj.png" alt="CV js developer"> -->
-            <div class="nav__logo__text">
-                <ul>
-                    <li>Галина Кравченко</li>
-                    <li class='separator'></li>
-                    <li><h1>Практикующий психолог и психотерапевт</h1></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="nav__menu"> <!-- блок меню -->
-        <?
-            // створюємо головне меню
-                $n = 0;
-                foreach($main_content as $key=>$value) {
-                    $id = ($value['type'] == 'footer') ? "footer" : "module{$n}";
-                    $n++;
-                    if ($value['menu_item'])
-                    echo "
-                    <span class='nav__elem action' data-id='{$id}'>{$value['menu_item']}</span>
-                    ";
-                }
-            // створюємо смарт-меню
-                echo "
-                    <div class='nav__smartmenu'>
-                    <ul>
-                    <li class='nav__smartmenu__close'><span id='nav-smart-menu-close'>&#10006;</span></li>
-                    ";
-                $n = 0;
-                foreach($main_content as $key=>$value) {
-                    $id = ($value['type'] == 'footer') ? "footer" : "module{$n}";
-                    $separate = '';
-                    if ($value != end($main_content)) $separate = "<li class='separator'></li>";
-                    $n++;
-
-                    if ($value['menu_item'])
-                    echo "
-                    <li class='nav__smartmenu__elem' data-id='{$id}'>
-                    {$value['menu_item']}
-                    </li>
-                    {$separate}
-                    ";
-                }
-                    echo "
-                </ul>
-                </div>
-                ";
-
-            ?>
-        </div>
-    </nav>
-
-    <main>
-        <div id="home-arrow" class='hidden-elem'></div>
-        <?
-        // створюємо розділи сайту
-            $n = 0;
-            foreach($main_content as $key=>$value) {
-                if ($value['type'] == 'footer') continue;
-                $id = "module{$n}";
-                $class = "main__module";
-                if ($value['class']) $class .= ' '.$value['class'];
-
-                $sub = $value['menu_item'] ? '' : 'sub-';
-                $header = $value['header'] ? "<h2 class='main__module__{$sub}header'>{$value['header']}</h2>" : "";
-                echo "
-                <div class='{$class}' id='{$id}'>
-                    {$header}
-                    <div class='main__module__content'>
-                        {$img1}
-                        {$img2}
-                        {$main_content[$n]['text']}
-                    </div>
-                </div>
-                ";
-                $n++;
-            }
-        ?>
+        </div> <!-- main__module -->
+        
         
     </main>
 
-    <footer>
-        <?
-            foreach($main_content as $value) {
-                if ($value['type'] == 'footer') {
-                    echo "
-                    <div id='footer'>
-                        <h2 class='footer__header'>{$value['header']}</h2>
-                        <div class='footer__content'>{$value['text']}</div>
-                    </div>
-
-                    <div class='footer-copyright'>
-                    </div>
-
-                    ";
-                }
-            }
-        ?>
+    <footer id="contacts">
+        <div class="footer__header">
+            Со мной можно связаться:
+        </div>
+        <div class="footer__content">
+            <ul>
+                <li>
+                    <a href='mailto:kravchenko.galina@outlook.com'><img class='phone-icon' src='assets/img/email.png'>
+                    kravchenko.galina@outlook.com</a>
+                </li>
+                <li>
+                    Галина Кравченко. Психотерапевт. Украина, г.Киев
+                </li>
+            </ul>
+        </div>
     </footer>
 
     <script>
@@ -301,6 +295,8 @@
             if (i.classList.contains('center')) btn.classList.add('center');
             btn.classList.add('read-more-button');
             btn.setAttribute('data-readmore','true');
+            btn.innerHTML = 'Read more ...';
+            if (i.dataset.text) btn.innerHTML = i.dataset.text;
         })
 
         document.addEventListener('click', (event)=>{ // клік по Read more - розгортання
