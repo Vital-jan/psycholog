@@ -9,6 +9,7 @@ $xs: 480px;
     box-sizing: border-box;
 }
 
+
 // Слайдер
 .explorer-slider {
     margin: 0 auto;
@@ -285,7 +286,7 @@ $xs: 480px;
     }
 }
 
-.header {
+.explorer-modal__header {
     font-size: 20px;
     font-weight: bold;
     padding: 10px;
@@ -303,13 +304,13 @@ $xs: 480px;
     }
 }
 
-.footer {
+.explorer-modal__footer {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding-bottom: 20px;
     height: 50px;
-    .button {
+    .explorer-modal__footer__button {
         display: flex;
         align-items: center;
         border-radius: 8px;
@@ -364,5 +365,77 @@ $xs: 480px;
     @media (max-width: $xs) {
         width: 100%;
     }
-
 }
+
+.explorer-form {
+    color: inherit;
+    font-size: 0.9em;
+
+    @-webkit-keyframes autofill { // убираем фон автозаполнения chrome  --- [
+        to {
+          color:inherit;
+          background: inherit;
+        }
+      }
+       
+    input:-webkit-autofill {
+        -webkit-animation-name: autofill;
+        -webkit-animation-fill-mode: both;
+    } //---------------------------------------------------------------]
+
+    label {
+        margin: 0 auto 10px;
+        display: block;
+    }
+
+    input, textarea {
+        outline: none;
+        display: inline-block; 
+        width: 100%;
+    }
+
+    %input {
+        font-size: .9em;
+        background-color: inherit;
+        border-radius: 15px;
+        border: 2px solid grey;
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+    .input_text {
+        @extend %input;
+    } // input-text
+    
+    .input_textarea {
+        @extend %input;
+        height: 5em;
+    }
+
+    .checkbox {
+        cursor: pointer;
+        span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 30%;
+            background-color: inherit;
+            border: 4px solid inherit;
+            top: 2px;
+            left: -5px;
+        }
+    }         
+    input[type=checkbox] {
+        display: none;
+        &:checked+span {
+            background-color: inherit;
+        }
+    }
+
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+
+} // form

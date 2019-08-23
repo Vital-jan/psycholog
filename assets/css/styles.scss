@@ -40,6 +40,7 @@ $xs: 640px;
     margin: 0;
     padding: 0;
     position: relative;
+    text-decoration: none;
 }
 
 @font-face {
@@ -93,12 +94,6 @@ body {
     font-family: 'helvetica';
     font-size: 20px;
     color: $normal_text;
-    a {
-        color: $normal_text;
-    }
-    li {
-        list-style-type: none;
-    }
 }
 
 .action { // кликабельные эл-ты
@@ -129,48 +124,42 @@ body {
 
 .flex-blocks {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+
+    @media (max-width: $md) {
+        margin-bottom: 20px;
+        width: 100%;
+        justify-content: space-around;
+        // &>* {
+        //     margin-bottom: 30px;
+        //     text-align: center;
+        // }
+    }
     
-    &.flex-blocks_center {
+    &.center-blocks {
         justify-content: center;
         align-items: center;
     }
-
-    @media (max-width: $md) {
-        flex-direction: column;
+    
+    &.justify-blocks {
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
-        
-        // &>* {
-        //     margin-bottom: 30px;
-        // }
+    }
 
-        &.no-wrap {
-            justify-content: space-between;
-            align-items: center;
-            flex-direction: row;
-            margin-bottom: 0;
-        } // no-wrap
-    } // @media
+    &.no-wrap {
+        flex-wrap: nowrap;
+    } // no-wrap
 
-
-    .flex-blocks-3 {
+    .flex-blocks_3 {
         width: 30%;
-
         @media (max-width: $md) {
-            margin-bottom: 20px;
             width: 100%;
         }
-    } // flex-blocks-3
+    } // flex-blocks_3
 
 } // flex-blocks
-
-.justify-blocks {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .separator { // разделитель в смарт-меню и др.
     width: 100%;
@@ -460,13 +449,21 @@ main {
                 padding: 0 5%;
             }
 
-            li {
-                margin: 20px 0;
+            a {
+                color: $normal_text;
+                border-bottom: 1px solid $normal_text;
+                &.no-underline {
+                    border: none;
+                }
             }
-            
+        
+            li {
+                list-style-type: none;
+                margin: 10px 0;
+            }
+        
             p {
-                width: 100%;
-                margin: 0;
+                margin-top: 20px;
                 margin-bottom: 20px;
                 text-align: justify;
                 @media (max-width: $md) {
@@ -537,12 +534,10 @@ footer {
     border-bottom-left-radius: 5px;
     font-style: italic;
     font-size: 0.95em;
-    position: relative;
     clear: both;
-    left: 120px;
-    top: 10px;
     padding: 20px;
-    width: 70%!important;
+    margin-bottom: 40px!important;
+    margin-left: 40px;
     @media (max-width: $sm) {
         left: 50px;
     }
@@ -667,13 +662,14 @@ footer {
 
 .about {
     align-items: flex-start;
+
     @media (max-width: $md) {
+        justify-content: center;
         align-items: center;
     }
 
     .about__img {
         width: 30%;
-        margin-right: 5%;
         text-align: center;
 
         @media (max-width: $md) {
@@ -692,9 +688,13 @@ footer {
     } // about__img
 
     .about__text {
-        width: 70%;
-        @media (max-width: $sm) {
+        width: 65%;
+        @media (max-width: $md) {
             width: 100%;
+
+            p {
+                text-align: center;
+            }
         }
     } // about__text
 }
@@ -714,9 +714,12 @@ footer {
 }
 
 .about__education__img {
-        width: 20%;
-        float: left;
-        margin-right: 30px;
+        width: 15%;
+        // float: left;
+        // margin-right: 30px;
+}
+.about__education__text {
+        width: 80%;
 }
 
 .list-marker {
@@ -770,4 +773,19 @@ footer {
     background-repeat: no-repeat;
     background-position: top right;
     background-size: contain;
+}
+
+.service {
+    .service__item {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.quession { // действие по клику - отправка почты
+    cursor: pointer;
+    font-weight: bold;
 }

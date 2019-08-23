@@ -350,7 +350,7 @@
           transform: rotate(45deg);
 }
 
-.explorer-modal-window .explorer-modal .header {
+.explorer-modal-window .explorer-modal .explorer-modal__header {
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
@@ -369,7 +369,7 @@
   display: block;
 }
 
-.explorer-modal-window .explorer-modal .footer {
+.explorer-modal-window .explorer-modal .explorer-modal__footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -383,7 +383,7 @@
   height: 50px;
 }
 
-.explorer-modal-window .explorer-modal .footer .button {
+.explorer-modal-window .explorer-modal .explorer-modal__footer .explorer-modal__footer__button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -398,21 +398,21 @@
   border: 2px solid #c8c8c8;
 }
 
-.explorer-modal-window .explorer-modal .footer .button:focus {
+.explorer-modal-window .explorer-modal .explorer-modal__footer .explorer-modal__footer__button:focus {
   outline: none;
   background-color: whitesmoke;
   border-color: #bebebe;
 }
 
-.explorer-modal-window .explorer-modal .footer .button:hover {
+.explorer-modal-window .explorer-modal .explorer-modal__footer .explorer-modal__footer__button:hover {
   border-color: #fff;
 }
 
-.explorer-modal-window .explorer-modal .footer .button * {
+.explorer-modal-window .explorer-modal .explorer-modal__footer .explorer-modal__footer__button * {
   padding: 0 5px;
 }
 
-.explorer-modal-window .explorer-modal .footer .button img {
+.explorer-modal-window .explorer-modal .explorer-modal__footer .explorer-modal__footer__button img {
   margin-right: 5px;
   height: 20px;
 }
@@ -457,5 +457,73 @@
   .explorer-popup {
     width: 100%;
   }
+}
+
+.explorer-form {
+  color: inherit;
+  font-size: 0.9em;
+}
+
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: inherit;
+  }
+}
+
+.explorer-form input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+.explorer-form label {
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.explorer-form input, .explorer-form textarea {
+  outline: none;
+  display: inline-block;
+  width: 100%;
+}
+
+.explorer-form .input_text, .explorer-form .input_textarea {
+  font-size: .9em;
+  background-color: inherit;
+  border-radius: 15px;
+  border: 2px solid grey;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.explorer-form .input_textarea {
+  height: 5em;
+}
+
+.explorer-form .checkbox {
+  cursor: pointer;
+}
+
+.explorer-form .checkbox span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 30%;
+  background-color: inherit;
+  border: 4px solid inherit;
+  top: 2px;
+  left: -5px;
+}
+
+.explorer-form input[type=checkbox] {
+  display: none;
+}
+
+.explorer-form input[type=checkbox]:checked + span {
+  background-color: inherit;
+}
+
+.explorer-form input[type=checkbox] {
+  display: none;
 }
 /*# sourceMappingURL=explorer.css.map */

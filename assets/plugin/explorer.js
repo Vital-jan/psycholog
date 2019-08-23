@@ -588,7 +588,7 @@ function modalWindow(
   // clickAction - функция обработчик события click - позволяет встраивать другие управляющие элементы в тело модального окна
   // btnDefault - номер кнопки по умолчанию
   // modalId - пользовательский идентификатор при необходимости вызова вложенного модального окна
-  // userClass - css класс для стилизации содержимого модального окна
+  // userClass - css класс для стилизации содержимого модального окна (строка или массив из нескольких классов)
   // mainStyle - объект css свойств для стилизации окна. Доступны свойства: background, backgroundColor, border, color, width, height, top.
   // buttonStyle - объект css свойств для стилизации кнопок. Доступны свойства: background, backgroundColor, border, color.
   // в качестве аргументов caption, text и buttons может выступать html
@@ -606,7 +606,7 @@ function modalWindow(
   if (modalWindow) { 
     document.body.style.overflow = "hidden"; // запрет прокрутки
     modalWindow.style.display = "block"; // показать модальное
-    modalWindow.querySelectorAll(`.footer button`)[btnDefault].focus();
+    modalWindow.querySelectorAll(`.explorer-modal__footer__button`)[btnDefault].focus(); // назначить активную кнопку
     return;
   };
   
@@ -630,7 +630,7 @@ function modalWindow(
 
   // наполняем окно контентом
   wnd.innerHTML = `
-  <div class="header">
+  <div class="explorer-modal__header">
   ${caption}
   </div>
   <div class='explorer-modal__close'></div>
@@ -640,8 +640,8 @@ function modalWindow(
   let pTeg = wnd.querySelector(`.explorer-modal-window__content`);
   pTeg.style.height = '70%';
   pTeg.innerHTML = text;
-  wnd.innerHTML += '<div class="footer"></div>';
-  let footer = wnd.querySelector(`.explorer-modal div.footer`);
+  wnd.innerHTML += '<div class="explorer-modal__footer"></div>';
+  let footer = wnd.querySelector(`.explorer-modal__footer`);
 
   // добавляем кнопки
   if (buttons)
@@ -654,15 +654,21 @@ function modalWindow(
       if (buttonStyle.border) btnStyle += `border: ${buttonStyle.border};`;
     }
     btnStyle += '"';
-    footer.innerHTML += `<button class='button' type="button" data-action='${n}' style = ${btnStyle}>${i}</button>`;
+    footer.innerHTML += `<button class='explorer-modal__footer__button' type="button" data-action='${n}' style = ${btnStyle}>${i}</button>`;
   });
 
   if (!userClass) { // стилизуем, если не задан аргумент класс
     wnd.style.borderColor = getComputedStyle(document.body).color;
+    wnd.style.background = getComputedStyle(document.body).background;
     wnd.querySelector('.explorer-modal__close').style.borderColor = getComputedStyle(document.body).color;
   } 
-  else {
-    wnd.classList.add(userClass);
+  else { // добавляем классы
+    if (typeof userClass == 'string') wnd.classList.add(userClass);
+    if (typeof userClass == 'object')
+      userClass.forEach((i)=>
+      {      
+        wnd.classList.add(i);
+      })
   };
 
   if (mainStyle) { // стилизуем окно, если указан аргумент mainStyle
@@ -676,8 +682,8 @@ function modalWindow(
   }
 
   // обработчик кликов footer
-  wnd.querySelector('.footer').addEventListener('click', (event)=>{
-    if (event.target.classList.contains('button')) {
+  wnd.querySelector('.explorer-modal__footer').addEventListener('click', (event)=>{
+    if (event.target.classList.contains('explorer-modal__footer__button')) {
       event.stopPropagation();
       action(event.target.dataset.action);
     }
@@ -687,7 +693,7 @@ function modalWindow(
   if (clickAction) wnd.addEventListener('click', clickAction);
   
   // назначаем активную кнопку
-  let btns = wnd.querySelectorAll(`.footer button`);
+  let btns = wnd.querySelectorAll(`.explorer-modal__footer .explorer-modal__footer__button`);
   btns[btnDefault].focus();
 
   // обработка клавиши tab
