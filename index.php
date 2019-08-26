@@ -183,7 +183,7 @@
                     <h2 class='main__module__sub-header'>Як зробити перший крок ?</h2>
                     <div class='read-more center' data-text="Докладніше ... &raquo;">
                         <p>
-                            - Вам не треба готуватись, як до іспиту. Перший крок Ви можете зробити прямо зараз, поставивши <span class='action'>питання психологу</span> онлайн.
+                            - Вам не треба готуватись, як до іспиту. Перший крок Ви можете зробити прямо зараз, поставивши <span class='action quession quession_common'>питання психологу</span> онлайн.
                         </p>
                         <div class='flex-blocks center-blocks'>
                             <img src='assets/img/step.png' style='height: 250px' alt='Питання психологу'>
@@ -261,28 +261,28 @@
             </div>
             <div class="main__module__content">
                 <p class='flex-blocks justify-blocks service quession quession_personal' id='service-personal'>
-                    <span style='width:70%'>Індивідуальні консультації психотерапевта</span>
+                    <span class='service_description'>Індивідуальні консультації психотерапевта</span>
                     <span class="service__item">
                         <img src='assets/img/single.png' alt='Індивідуальні консультації психотерапевта'>
                         <span>500 грн</span>
                     </span>
                 </p>
                 <p class='flex-blocks justify-blocks service quession quession_family' id='service-family'>
-                    <span style='width:70%'>Сімейні консультації психотерапевта</span>
+                    <span class='service_description'>Сімейні консультації психотерапевта</span>
                     <span class="service__item">
                         <img src='assets/img/family.png' alt='Сімейні консультації психотерапевта'>
                         <span>700 грн</span>
                     </span>
                 </p>
                 <p class='flex-blocks justify-blocks service quession quession_group' id='service-group'>
-                    <span style='width:70%'>Групові та корпоративні психологічні тренінги</span>
+                    <span class='service_description'>Групові та корпоративні психологічні тренінги</span>
                     <span class="service__item">
                         <img src='assets/img/human.png' alt='Групові та корпоративні психологічні тренінги'>
                         <span>от 2000 грн</span>
                     </span>
                 </p>
                 <p class='flex-blocks justify-blocks service quession quession_online' id='service-online'>
-                    <span style='width:70%'>Для тих, хто далеко від Києва, психотерапевт надає онлайн консультації в skype.</span>
+                    <span class='service_description'>Для тих, хто далеко від Києва, психотерапевт надає онлайн консультації в skype.</span>
                     <span class="service__item" >
                         <img src='assets/img/skype-img.png' alt='Онлайн консультації психолога'>
                         <span>300 грн</span>
@@ -302,7 +302,7 @@
         
         <div class="main__module">
             <div class="main__module__content flex-blocks">
-                <div class='action-button quession quession_common'><span>Питання психологу &raquo;</span></div>
+                <div class='action-button quession quession_common'><span>Звернутись до психолога &raquo;</span></div>
                 <div class='action-button quession quession_quickly'><span>Термінова допомога &raquo;</span></div>
             </div>
         </div> <!-- main__module -->
@@ -356,6 +356,8 @@
             }
 
             if (el.matches('a')) {
+                if (!el.id) return;
+                if (el.id.charAt(0) != '#') return;
                 moduleView(el.getAttribute('href'));
                 event.preventDefault();
             }
@@ -457,12 +459,12 @@ window.onscroll = ()=>{
         }
 // ---------------------------------------------------------------------------------- кінець шаблону сайту
 let email_form = [
-        {"class":"quession_common", "mail":"kravchenko.galina@outlook.com", "subject":"Питання психологу", "message":"Добрий день. Потрібна Ваша допомога. Зв'яжіться, будь ласка, зі мною."},
-        {"class":"quession_personal", "mail":"kravchenko.galina@outlook.com", "subject":"Індивідуальна терапія", "message":"Добрий день. У мене питання з приводу индивідуальних консультацій. Зв'яжіться, будь ласка, зі мною."},
-        {"class":"quession_family", "mail":"kravchenko.galina@outlook.com", "subject":"Сімейна терапія", "message":"Добрий день. У мене питання з приводу сімейної терапії. Зв'яжіться, будь ласка, зі мною."},
-        {"class":"quession_online", "mail":"kravchenko.galina@outlook.com", "subject":"Онлайн консультації", "message":"Добрий день. У мене питання з приводу онлайн консультацій. Зв'яжіться, будь ласка, зі мною."},
-        {"class":"quession_group", "mail":"kravchenko.galina@outlook.com", "subject":"Групові заняття", "message":"Добрий день. У мене к Вам питання з приводу групових занять. Зв'яжіться, будь ласка, зі мною."},
-        {"class":"quession_quickly", "mail":"kravchenko.galina@outlook.com", "subject":"Термінова допомога", "message":"Добрий день. Я почуваюсь жахливо! Мені терміново потрібна Ваша Допомога!"}
+        {"class":"quession_common", "subject":"Питання психологу", "message":"Добрий день. Потрібна Ваша допомога. Зв'яжіться, будь ласка, зі мною."},
+        {"class":"quession_personal", "subject":"Індивідуальна терапія", "message":"Добрий день. У мене питання з приводу индивідуальних консультацій. Зв'яжіться, будь ласка, зі мною."},
+        {"class":"quession_family", "subject":"Сімейна терапія", "message":"Добрий день. У мене питання з приводу сімейної терапії. Зв'яжіться, будь ласка, зі мною."},
+        {"class":"quession_online", "subject":"Онлайн консультації", "message":"Добрий день. У мене питання з приводу онлайн консультацій. Зв'яжіться, будь ласка, зі мною."},
+        {"class":"quession_group", "subject":"Групові заняття", "message":"Добрий день. У мене к Вам питання з приводу групових занять. Зв'яжіться, будь ласка, зі мною."},
+        {"class":"quession_quickly", "subject":"-=!!!=- Термінова допомога!", "message":"Добрий день. Я почуваюсь жахливо! Мені терміново потрібна Ваша Допомога!"}
 ];
 
 document.querySelectorAll('.action-button').
@@ -488,10 +490,32 @@ document.addEventListener('click', (event)=>{
                     </form>
                     `,
                     ['Надіслати', 'Повернутись'],
-                    (n)=>{},
-                )
+                    (n)=>{
+
+                        if (n == 1) { // кнопка повернутись
+                            closeWindow('send-mail');
+                            return;
+                        }
+
+                        // кнопка надіслати:
+                        let form = document.forms.mail;
+                        // веріфікація
+                        if (form.useremail.value.length < 7 && form.userphone.value.length < 7)
+                            {explorerPopUp("Щоб психолог міг з Вами зв'язатись, зазначте Ваш телефон або email.");}
+                        else
+                        { // отправка email
+                            sendMail ('kravchenko.galina@outlook.com', form.subj,
+                                'Від кого: ' + form.username.value + '\n' + 'email: ' + form.useremail.value + '\n' + 'Телефон: ' + form.userphone.value + '\n' + form.usermsg.value + '\n', 'psycholog.net.ua', (response)=>{
+                                    if (response.send) {
+                                        explorerPopUp(`Ваше повідомлення надіслано на мій email. Я обов'язково зв'яжусь з Вами за першої можливості.`);
+                                        closeWindow('send-mail');
+                                    }
+                                }, 'assets/ajax/');
+                        }
+                    }, undefined, 0, 'send-mail'
+                ) // modalwindow
                 document.forms.mail.usermsg.value = i.message;
-                // break;
+                document.forms.mail.subj = i.subject;
             }
         });
     }
