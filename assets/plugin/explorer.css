@@ -220,6 +220,18 @@
   top: 0;
 }
 
+.explorer-scroll .explorer-scroll__runner {
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  background: white;
+  opacity: .8;
+}
+
 .explorer-scroll .explorer-scroll__arrow {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -231,7 +243,7 @@
   text-align: center;
   z-index: 1;
   height: 30px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background: inherit;
 }
 
 .explorer-scroll .explorer-scroll__arrow.arrow_top {

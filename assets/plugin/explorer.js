@@ -438,80 +438,111 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
 
     if (!el) return;
 
+    const viewArea = el.clientHeight; // розмір видимої частини
+    const fullArea = el.scrollHeight; // розмір повний
+    const overflow = fullArea - viewArea; // розмір прокрутки
+    if (overflow <= 0)  return;
+
+    const speed = 50; // швидкість скролу, px/sec
+    
     let scrolling = false; // чи відбувається скрол-анімація
     let noScroll = false; // заборона скролінгу по наведенню для смартфона (смартфон генерує mouseover+click)
-
+    
     el.classList.add("explorer-scroll"); // додаєм клас
     let html = el.innerHTML; // додаєм вкладені ел-ти
-    el.innerHTML = `  
-        <div class='explorer-scroll__block'>${html}</div>
-        `;
-    let overflow = el.scrollHeight - el.clientHeight; // розмір прокрутки
-    if (overflow <= 0)  return;
+    el.innerHTML = `<div class='explorer-scroll__block'>${html}</div>`;
     
     // додаєм стрілки
     el.innerHTML += `
-      <div class='explorer-scroll__arrow arrow_top'><span>&#10148;</span></div>
-      <div class='explorer-scroll__arrow arrow_bottom'><span>&#10148;</span></div>
-      `;
-    let up = el.querySelector(`.arrow_top`); // стрілки
-    let down = el.querySelector(`.arrow_bottom`);
-    let scroll = el.querySelector(`.explorer-scroll__block`); // блок, який переміщується
-    if (!step) step = el.getBoundingClientRect().height / 3;
+    <div class='explorer-scroll__arrow arrow_top'><span>&#10148;</span></div>
+    <div class='explorer-scroll__arrow arrow_bottom'><span>&#10148;</span></div>
+    <div class='explorer-scroll__runner'></div>
+    `;
+    
+    const up = el.querySelector(`.arrow_top`); // стрілки
+    const down = el.querySelector(`.arrow_bottom`);
+    const scroll = el.querySelector(`.explorer-scroll__block`); // блок, який переміщується
+    const runner = el.querySelector('.explorer-scroll__runner');
 
-    let arrowHeight = up.getBoundingClientRect().height;
+    if (!step) step = el.getBoundingClientRect().height / 3; // зсув по кліку за замовчуванням
+
+    const arrowHeight = up.getBoundingClientRect().height;
     scroll.style.top = arrowHeight + 'px';
 
   // обробники стрілок
 
-    up.addEventListener('mouseover', (event)=>{
+    up.addEventListener('mouseenter', (event)=>{
       if (noScroll){
         noScroll = false;
         return;
       }
 
       event.stopPropagation();
-      if (parseInt(scroll.style.top) >= arrowHeight) return;
+      if (parseInt(scroll.style.top) >= arrowHeight) {
+        scroll.style.top = arrowHeight;
+        return;
+      }
 
       scrolling = true;
       down.style.opacity = 1;
       down.style.cursor = 'pointer';
 
-      $(scroll).animate({top: arrowHeight}, overflow * 10, ()=>{
-        scrolling = false;
-        up.style.opacity = .5;
-        up.style.cursor = 'default';
-      });
+      $(scroll).animate(
+        {top: arrowHeight}, 
+        {
+          duration: Math.abs(parseInt(scroll.style.top)) / speed * 1000,
+          complete: ()=>{
+            scrolling = false;
+            up.style.opacity = .5;
+            up.style.cursor = 'default';
+          },
+          step: function(){
+            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';
+          }});
     }); // up.mouseover
 
-    up.addEventListener('mouseout', (event)=>{
+    up.addEventListener('mouseleave', (event)=>{
       if (scrolling) $(scroll).stop();
       scrolling = false;
-    });
+    }); // up.mouseout
 
     up.addEventListener('click', (event)=>{
       event.stopPropagation();
-    });
+    }); // up.click
 
     up.addEventListener('touchstart', (event)=>{
       event.stopPropagation();
       noScroll = true;
       if (scrolling) return;
 
-      if (parseInt(scroll.style.top) < arrowHeight) {
+      let dy = arrowHeight - parseInt(scroll.style.top);
 
-          $(scroll).animate({top: `+=${step}px`}, duration);
-          down.style.opacity = 1;
-          down.style.cursor = 'pointer';
+      if (dy <= 0) {
+        $(scroll).animate({top: '+=10px'}, 100).animate({top: '-=10px'}, 100);
+        up.style.opacity = .5;
+        up.style.cursor = 'default';
+        return;
       }
-      else {
-          $(scroll).animate({top: '+=10px'}, 100).animate({top: '-=10px'}, 100);
-          up.style.opacity = .5;
-          up.style.cursor = 'default';
-      }
-    })
+
+      scrolling = true;
+      if (dy > step) dy = step;
+
+      $(scroll).animate(
+        {top: `+=${dy}px`},
+        {
+          duration: duration,
+          step: function() {
+            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';
+          },
+          complete: function () {
+            down.style.opacity = 1;
+            down.style.cursor = 'pointer';
+            scrolling = false;
+          }
+        });
+    }) // up.touchstart
     
-    down.addEventListener('mouseover', (event)=>{
+    down.addEventListener('mouseenter', (event)=>{
       if (noScroll){
         noScroll = false;
         return;
@@ -524,39 +555,61 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
       up.style.opacity = 1;
       up.style.cursor = 'pointer';
 
-      $(scroll).animate({top: `-=${overflow + arrowHeight * 2 + parseInt(scroll.style.top)}px`}, overflow * 10, ()=>{
-        scrolling = false;
-        down.style.opacity = .5;
-        down.style.cursor = 'default';
-      });
+      $(scroll).animate({top: `-${overflow + arrowHeight}px`},
+        {
+          duration: (overflow - Math.abs(parseInt(scroll.style.top))) / speed * 1000,
+          complete: function()
+          {
+            scrolling = false;
+            down.style.opacity = .5;
+            down.style.cursor = 'default';
+          },
+          step: function(){
+            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';
+          }
+        });
     }); // down.mouseover
 
-    down.addEventListener('mouseout', (event)=>{
+    down.addEventListener('mouseleave', (event)=>{
       if (scrolling) $(scroll).stop();
       scrolling = false;
-    });
+    }); // down.mouseout
     
     down.addEventListener('click', (event)=>{
       event.stopPropagation();
-    });
+    }); // down.click
 
     down.addEventListener('touchstart', (event)=>{
       noScroll = true;
       event.stopPropagation();
       if (scrolling) return;
 
-        if (parseInt(scroll.style.top) > -overflow)
+      let dy = overflow + parseInt(scroll.style.top) + arrowHeight;
+
+      if (dy <= 0) {
+        $(scroll).animate({top: '-=10px'}, 100).animate({top: '+=10px'}, 100);
+        down.style.opacity = .5;
+        down.style.cursor = 'default';
+        return
+      };
+
+      scrolling = true;
+      if (dy > step) dy = step;
+
+      $(scroll).animate(
+        {top: `-=${dy}px`},
         {
-            $(scroll).animate({top: `-=${step}px`}, duration);
+          duration: duration,
+          step: function () {
+            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';          },
+          complete: function () {
             up.style.opacity = 1;
             up.style.cursor = 'pointer';
+            scrolling = false;
+          }
         }
-        else {
-            $(scroll).animate({top: '-=10px'}, 100).animate({top: '+=10px'}, 100);
-            down.style.opacity = .5;
-            down.style.cursor = 'default';
-        }
-    })
+    ) // down.touchstart
+  });
 }
 
 // ==================================================================================

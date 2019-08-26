@@ -521,7 +521,6 @@ document.addEventListener('click', (event)=>{
     }
 })
 
-
 }); // DOMContentLoaded
     </script>
 </body>
