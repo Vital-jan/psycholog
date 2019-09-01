@@ -421,20 +421,36 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
   } // setPortfolio
 
   // ==========================================================================================================================
-  function setScroll(el, step = null, duration = 500) {
+            function setScroll(el, step = null, duration = 500, speed = 150, arrowCSS = {}, runnerBarCSS = {}, runnerCSS = {}) {
   // ==========================================================================================================================
+  // на сенсорних екранах скроллінг відбувається по click, на desktop - по наведенню
     // el - елемент DOM, зміст якого повинен скролитись
-    // step - крок скролінгу на 1 клік в px (тыльки для сенсорних екранів)
-    // duration - тривалість скролінгу на step px
-    // на сенсорних екранах скроллінг відбувається по click, на desktop - наведення.
+    // step - крок скролінгу на 1 клік в px (тільки для сенсорних екранів)
+    // duration - тривалість скролінгу на step px (тільки для сенсорних екранів)
+    // speed - швидкість скроллу по наведенню (px/sec, тільки desktop)
+    // arrowCSS - об'єкт властивостей стрілок. Дозволені властивості:
+      // height, color, backgroundColor, background;
+    // runnerBarCSS - об'єкт властивостей смуги прокрутки. Дозволені властивості:
+              // width, Color.
+    // runnerCSS - об'єкт властивостей бігунця. Дозволені властивості:
+              // visibility, width, height, color, backgroundColor, background, borderColor, borderRadius, borderWidth, border
     // якщо весь контент вміщується в контейнер, кнопки не відображаються та ніяких дій не відбувається.
 // ===========!!!!!!!!!!!!================
 // слідкувати за тим, щоб контент вміщувався в батьківський контейнер з overflow: hidden
-// як стилізувати:
-// .explorer-scroll__arrow {
-// z-index: 1;
-// height: 30px;
-// background-color: #fff;
+
+    function getRunnerY(overflow, viewArea, arrowHeight, runnerHeight) { // повертає коорд. Y бігунця
+      let top = Math.abs(parseInt(scroll.style.top) - arrowHeight);
+      let k = top / (overflow + 2*arrowHeight);
+      let y = (viewArea - runnerHeight) * k + 'px';
+      return y;
+    }
+    
+    function getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor) { // повертає linear-gradient для смуги прокрутки відповідно поточній прокрутці
+      let top = Math.abs(parseInt(scroll.style.top) - arrowHeight);
+      let k = top / (overflow + 2*arrowHeight) * 100;
+      k = +k.toFixed();
+      return `linear-gradient(to bottom, transparent 0%, transparent ${k-5}%, ${runnerBarColor} ${k}%, transparent ${k+5}%)`;
+    }
 
     if (!el) return;
 
@@ -443,10 +459,11 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
     const overflow = fullArea - viewArea; // розмір прокрутки
     if (overflow <= 0)  return;
 
-    const speed = 50; // швидкість скролу, px/sec
+    let arrowHeight = 30;
+    if (arrowCSS.height && !isNaN(parseInt(arrowCSS.height))) arrowHeight = parseInt(arrowCSS.height); // привласнюємо значення висоти стрілок
     
-    let scrolling = false; // чи відбувається скрол-анімація
-    let noScroll = false; // заборона скролінгу по наведенню для смартфона (смартфон генерує mouseover+click)
+    let scrollingTouch = false; // чи відбувається скрол-анімація по кліку
+    let scrollingHover = false; // чи відбувається скрол-анімація по наведенню
     
     el.classList.add("explorer-scroll"); // додаєм клас
     let html = el.innerHTML; // додаєм вкладені ел-ти
@@ -456,171 +473,245 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
     el.innerHTML += `
     <div class='explorer-scroll__arrow arrow_top'><span>&#10148;</span></div>
     <div class='explorer-scroll__arrow arrow_bottom'><span>&#10148;</span></div>
+    <div class='explorer-scroll__bar'></div>
     <div class='explorer-scroll__runner'></div>
     `;
     
     const up = el.querySelector(`.arrow_top`); // стрілки
+    const upArrow = up.firstChild;
     const down = el.querySelector(`.arrow_bottom`);
+    const downArrow = down.firstChild;
     const scroll = el.querySelector(`.explorer-scroll__block`); // блок, який переміщується
     const runner = el.querySelector('.explorer-scroll__runner');
+    const bar = el.querySelector('.explorer-scroll__bar');
 
-    if (!step) step = el.getBoundingClientRect().height / 3; // зсув по кліку за замовчуванням
+    // стилізація стрілок
+    up.style.height = arrowHeight + 'px';
+    down.style.height = arrowHeight + 'px';
+    if (arrowCSS.color) up.style.color = arrowCSS.color;
+    if (arrowCSS.backgroundColor) up.style.backgroundImage = `linear-gradient(to bottom, ${arrowCSS.backgroundColor}, transparent)`;
+    if (arrowCSS.background) up.style.background = arrowCSS.background;
+    if (arrowCSS.color) down.style.color = arrowCSS.color;
+    if (arrowCSS.backgroundColor) down.style.backgroundImage = `linear-gradient(to top, ${arrowCSS.backgroundColor}, transparent)`;
+    if (arrowCSS.background) down.style.background = arrowCSS.background;
+    // стилізація бігунця
+    if (runnerCSS.width) runner.style.width = runnerCSS.width + 'px';
+    if (runnerCSS.height) runner.style.height = runnerCSS.height + 'px';
+    if (runnerCSS.color) runner.style.color = runnerCSS.color;
+    if (runnerCSS.backgroundColor) runner.style.backgroundColor = runnerCSS.backgroundColor;
+    if (runnerCSS.background) runner.style.background = runnerCSS.background;
+    if (runnerCSS.borderColor) runner.style.borderColor = runnerCSS.borderColor;
+    if (runnerCSS.borderRadius) runner.style.borderRadius = runnerCSS.borderRadius;
+    if (runnerCSS.borderWidth) runner.style.borderWidth = runnerCSS.borderWidth;
+    if (runnerCSS.border) runner.style.border = runnerCSS.border;
+    if (runnerCSS.visibility) runner.style.visibility = runnerCSS.visibility;
+    let runnerHeight = getComputedStyle(runner).height;
+    // стилізація смуги прокрутки
+    if (runnerBarCSS.width) bar.style.width = runnerBarCSS.width + 'px';
+    let runnerBarColor = 'black';
+    if (runnerBarCSS.color) runnerBarColor = runnerBarCSS.color;
+    if (!step) step = viewArea / 3; // зсув по кліку за замовчуванням
 
-    const arrowHeight = up.getBoundingClientRect().height;
     scroll.style.top = arrowHeight + 'px';
+    runner.style.top = getRunnerY(overflow, viewArea, arrowHeight); // корекція позиції бігунця на початку
+    bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);;
 
   // обробники стрілок
+    // ***************************************************************************************************************
 
     up.addEventListener('mouseenter', (event)=>{
-      if (noScroll){
-        noScroll = false;
-        return;
-      }
 
       event.stopPropagation();
+      if (scrollingTouch || scrollingHover) return;
+
       if (parseInt(scroll.style.top) >= arrowHeight) {
-        scroll.style.top = arrowHeight;
+        scroll.style.top = arrowHeight + 'px';
+        bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
         return;
       }
 
-      scrolling = true;
-      down.style.opacity = 1;
+      downArrow.style.opacity = 1; // активуємо кнопку вниз
       down.style.cursor = 'pointer';
-
+      
+      scrollingHover = true; // старт анімації по наведенню
       $(scroll).animate(
         {top: arrowHeight}, 
         {
-          duration: Math.abs(parseInt(scroll.style.top)) / speed * 1000,
+          duration: Math.abs(parseInt(scroll.style.top) - arrowHeight) / speed * 1000,
           complete: ()=>{
-            scrolling = false;
-            up.style.opacity = .5;
+            scrollingHover = false; // кінець анімації по наведенню
+            upArrow.style.opacity = .5;
             up.style.cursor = 'default';
           },
           step: function(){
-            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';
+            runner.style.top = getRunnerY(overflow, viewArea, arrowHeight);
+            bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
           }});
     }); // up.mouseover
 
-    up.addEventListener('mouseleave', (event)=>{
-      if (scrolling) $(scroll).stop();
-      scrolling = false;
+    // ***************************************************************************************************************
+    up.addEventListener('mouseleave', (event)=>{ 
+      
+      event.stopPropagation();
+      if (scrollingTouch) return;
+      
+      if (scrollingHover) { // зупиняємо анімацію по наведенню
+        $(scroll).stop();
+        scrollingHover = false;
+      }
     }); // up.mouseout
-
+    
+    // ***************************************************************************************************************
     up.addEventListener('click', (event)=>{
       event.stopPropagation();
     }); // up.click
-
+    
+    // ***************************************************************************************************************
     up.addEventListener('touchstart', (event)=>{
+      
       event.stopPropagation();
-      noScroll = true;
-      if (scrolling) return;
+      if (scrollingHover) return;
+
+      if (scrollingTouch) {
+        $(scroll).stop();
+        scrollingTouch = false;
+      }
 
       let dy = arrowHeight - parseInt(scroll.style.top);
-
+      
       if (dy <= 0) {
+        scroll.style.top = arrowHeight +'px';
+        bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
         $(scroll).animate({top: '+=10px'}, 100).animate({top: '-=10px'}, 100);
-        up.style.opacity = .5;
+        upArrow.style.opacity = .5;
         up.style.cursor = 'default';
         return;
       }
-
-      scrolling = true;
+      
       if (dy > step) dy = step;
-
+      
+      scrollingTouch = true; // початок анімаціїї по кліку
       $(scroll).animate(
         {top: `+=${dy}px`},
         {
           duration: duration,
           step: function() {
-            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';
+            runner.style.top = getRunnerY(overflow, viewArea, arrowHeight);
+            bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
           },
           complete: function () {
-            down.style.opacity = 1;
+            downArrow.style.opacity = 1;
             down.style.cursor = 'pointer';
-            scrolling = false;
+            scrollingTouch = false; // кінець анімації по кліку
           }
         });
-    }) // up.touchstart
-    
+      }) // up.touchstart
+      
+    // ***************************************************************************************************************
     down.addEventListener('mouseenter', (event)=>{
-      if (noScroll){
-        noScroll = false;
-        return;
-      }
+      
       event.stopPropagation();
-
-      if (parseInt(scroll.style.top) <= -(overflow + arrowHeight)) return;
-
-      scrolling = true;
-      up.style.opacity = 1;
+      if (scrollingTouch || scrollingHover) return;
+      
+      // if (parseInt(scroll.style.top) <= -(overflow + arrowHeight)) {
+      //   return;
+      // }
+      
+      scrollingHover = true;
+      upArrow.style.opacity = 1;
       up.style.cursor = 'pointer';
-
       $(scroll).animate({top: `-${overflow + arrowHeight}px`},
+      {
+        duration: (overflow + 2 * arrowHeight + (parseInt(scroll.style.top) - arrowHeight)) / speed * 1000,
+        complete: function()
         {
-          duration: (overflow - Math.abs(parseInt(scroll.style.top))) / speed * 1000,
-          complete: function()
-          {
-            scrolling = false;
-            down.style.opacity = .5;
-            down.style.cursor = 'default';
-          },
-          step: function(){
-            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';
-          }
-        });
-    }); // down.mouseover
-
+          scrollingHover = false;
+          downArrow.style.opacity = .5;
+          down.style.cursor = 'default';
+        },
+        step: function(){
+          runner.style.top = getRunnerY(overflow, viewArea, arrowHeight);
+          bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
+        }
+      });
+      runner.style.top = getRunnerY(overflow, viewArea, arrowHeight); // корекція позиції в кінці скролу
+      bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
+    }); // down.mouseenter
+    
+    // ***************************************************************************************************************
     down.addEventListener('mouseleave', (event)=>{
-      if (scrolling) $(scroll).stop();
-      scrolling = false;
+      
+      event.stopPropagation();
+      if (scrollingTouch) return;
+      
+      if (scrollingHover) { // кінець анімації по кліку
+        $(scroll).stop();
+        scrollingHover = false;
+      }
     }); // down.mouseout
     
+    // ***************************************************************************************************************
     down.addEventListener('click', (event)=>{
       event.stopPropagation();
     }); // down.click
-
+    
+    // ***************************************************************************************************************
     down.addEventListener('touchstart', (event)=>{
-      noScroll = true;
+
       event.stopPropagation();
-      if (scrolling) return;
+      if (scrollingHover) return;
+
+      if (scrollingTouch) {
+        $(scroll).stop();
+        scrollingTouch = false;
+      }
 
       let dy = overflow + parseInt(scroll.style.top) + arrowHeight;
-
       if (dy <= 0) {
+        scroll.style.top = -overflow - arrowHeight + 'px';
         $(scroll).animate({top: '-=10px'}, 100).animate({top: '+=10px'}, 100);
-        down.style.opacity = .5;
+        downArrow.style.opacity = .5;
         down.style.cursor = 'default';
         return
       };
 
-      scrolling = true;
       if (dy > step) dy = step;
 
+      scrollingTouch = true; // початок анімації по кліку
       $(scroll).animate(
         {top: `-=${dy}px`},
         {
           duration: duration,
           step: function () {
-            runner.style.top = Math.abs(parseInt(scroll.style.top) - arrowHeight) / overflow * (viewArea - 2 * arrowHeight) + 'px';          },
+            runner.style.top = getRunnerY(overflow, viewArea, arrowHeight);
+            bar.style.background = getRunnerGradient(overflow, viewArea, arrowHeight, runnerBarColor);
+          },
           complete: function () {
-            up.style.opacity = 1;
+            upArrow.style.opacity = 1;
             up.style.cursor = 'pointer';
-            scrolling = false;
+            scrollingTouch = false; // кінець анімації по кліку
           }
         }
     ) // down.touchstart
   });
-}
+} // setScroll function
+
+
 
 // ==================================================================================
-function closeWindow (id) { // закрытие модального окна
+        function closeWindow (id) { // закрытие модального окна
+// ==================================================================================
 // w - идентификатор модального окна
-  w = document.querySelector(`#${id}`);
-  w.style.display = 'none';
-  document.body.style.overflow = "auto";
+w = document.querySelector(`#${id}`);
+w.style.display = 'none';
+document.body.style.overflow = "auto";
 }
 
-function modalWindow(
+
+
+// ==================================================================================
+        function modalWindow(
+// ==================================================================================
   caption,
   text,
   buttons = ['Ok'],

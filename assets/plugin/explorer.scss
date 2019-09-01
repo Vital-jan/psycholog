@@ -180,14 +180,14 @@ $xs: 480px;
 .explorer-scroll {
     position: relative;
     overflow: hidden;
-    margin: auto;
-    
+
     .explorer-scroll__block {
         position: relative;
         top: 0;
     }
 
     .explorer-scroll__runner {
+        // visibility: hidden;
         z-index: 1;
         width: 20px;
         height: 20px;
@@ -199,29 +199,43 @@ $xs: 480px;
         opacity: .8;
     }
 
+    .explorer-scroll__bar {
+        z-index: 1;
+        width: 5px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+    }
+
     .explorer-scroll__arrow { // стиль стрелок вверх-вниз
+        display: flex;
+        justify-content: center;
+        align-items: center;
         user-select: none;
         position: absolute;
         left: 0;
-        width: 100%;
-        text-align: center;
+        right: 0;
         z-index: 1;
         height: 30px;
-        background: inherit;
-
+        
         &.arrow_top {
             top: 0;
-            opacity: .5;
+            background-image: linear-gradient(to bottom, black, transparent);
             cursor: default;
+            
             span {
+                opacity: .5;
                 display: inline-block;
                 transform: rotate(-90deg);
             }
         }
         &.arrow_bottom {
             bottom: 0;
-            opacity: 1;
+            background-image: linear-gradient(to top, black, transparent);
             cursor: pointer;
+
             span {
                 display: inline-block;
                 transform: rotate(90deg);

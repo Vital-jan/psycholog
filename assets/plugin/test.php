@@ -16,50 +16,27 @@
     body {
         width: 100%;
     }
-    .scr1 {
+    #scr1 {
         height: 300px;
         width: 20%;
         display:block;
         background-color: blue;
+        margin: auto;
+        padding: 10px;
     }
 </style>
 </head>
 <body>
 
-    <div class="scr1">
+    <div id="scr1">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis soluta obcaecati hic in iste rerum expedita corrupti placeat! Nostrum labore magni est beatae cupiditate dicta, dolorem iusto eos voluptate molestias?
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto officiis quibusdam exercitationem dolore hic nulla, quas eius vel nihil, earum porro. Molestias rerum praesentium est animi quidem, officia sit dolorum tempore consequatur nostrum pariatur neque assumenda eos non ab. Dolorum ducimus quidem esse blanditiis culpa, voluptatibus ullam cupiditate facilis expedita?
     </div>
     
 </body>
     <script>
-        setScroll(document.querySelector('.scr1'));
-        document.body.addEventListener('DOMAttrModified', function(e){
-            console.log(e);
-        })
+
+        setScroll(document.querySelector('#scr1'), 50, undefined, undefined, {color: 'white', height: '100px', backgroundColor: 'darkblue'}, {color: 'white'});
  
-        // var oScope = {
-        //     $privateScope:{},
-        //     notify:function(sPropertyPath) {
-        //         console.log(sPropertyPath,"changed");
-        //     }
-        // };
-
-        // Object.defineProperties(oScope, {
-        //     myPropertyA: {
-
-        //         get:function() {
-        //             return oScope.$privateScope.myPropertyA
-        //         },
-
-        //         set:function(oValue){
-        //             oScope.$privateScope.myPropertyA = oValue;
-        //             oScope.notify("myPropertyA");
-        //         }
-        //     }
-        // });
-
-        // oScope.myPropertyA = "Some Value";
-
     </script>
 </html>

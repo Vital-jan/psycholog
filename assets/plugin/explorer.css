@@ -212,7 +212,6 @@
 .explorer-scroll {
   position: relative;
   overflow: hidden;
-  margin: auto;
 }
 
 .explorer-scroll .explorer-scroll__block {
@@ -232,27 +231,46 @@
   opacity: .8;
 }
 
+.explorer-scroll .explorer-scroll__bar {
+  z-index: 1;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+}
+
 .explorer-scroll .explorer-scroll__arrow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   position: absolute;
   left: 0;
-  width: 100%;
-  text-align: center;
+  right: 0;
   z-index: 1;
   height: 30px;
-  background: inherit;
 }
 
 .explorer-scroll .explorer-scroll__arrow.arrow_top {
   top: 0;
-  opacity: .5;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(black), to(transparent));
+  background-image: linear-gradient(to bottom, black, transparent);
   cursor: default;
 }
 
 .explorer-scroll .explorer-scroll__arrow.arrow_top span {
+  opacity: .5;
   display: inline-block;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
@@ -260,7 +278,8 @@
 
 .explorer-scroll .explorer-scroll__arrow.arrow_bottom {
   bottom: 0;
-  opacity: 1;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(black), to(transparent));
+  background-image: linear-gradient(to top, black, transparent);
   cursor: pointer;
 }
 
