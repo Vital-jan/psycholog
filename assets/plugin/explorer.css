@@ -219,18 +219,6 @@
   top: 0;
 }
 
-.explorer-scroll .explorer-scroll__runner {
-  z-index: 1;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  position: absolute;
-  right: -10px;
-  top: 0;
-  background: white;
-  opacity: .8;
-}
-
 .explorer-scroll .explorer-scroll__bar {
   z-index: 1;
   width: 5px;
@@ -255,35 +243,36 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   z-index: 1;
   height: 30px;
 }
 
-.explorer-scroll .explorer-scroll__arrow.arrow_top {
+.explorer-scroll .explorer-scroll__arrow.explorer-scroll__arrow-top {
   top: 0;
   background-image: -webkit-gradient(linear, left top, left bottom, from(black), to(transparent));
   background-image: linear-gradient(to bottom, black, transparent);
   cursor: default;
 }
 
-.explorer-scroll .explorer-scroll__arrow.arrow_top span {
+.explorer-scroll .explorer-scroll__arrow.explorer-scroll__arrow-top span {
   opacity: .5;
   display: inline-block;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
 }
 
-.explorer-scroll .explorer-scroll__arrow.arrow_bottom {
+.explorer-scroll .explorer-scroll__arrow.explorer-scroll__arrow-bottom {
   bottom: 0;
   background-image: -webkit-gradient(linear, left bottom, left top, from(black), to(transparent));
   background-image: linear-gradient(to top, black, transparent);
   cursor: pointer;
+  position: absolute;
 }
 
-.explorer-scroll .explorer-scroll__arrow.arrow_bottom span {
+.explorer-scroll .explorer-scroll__arrow.explorer-scroll__arrow-bottom span {
   display: inline-block;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);

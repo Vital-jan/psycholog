@@ -362,7 +362,7 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
       if (!el || !back) return; // якщо відсутній один з елементів
 
       let el2Scroll = back.querySelector('.explorer-scroll__block'); // Знаходимо елемент зі скроллом
-      let el2ScrollArrow = back.querySelector('.explorer-scroll__arrow-top'); // знаходимо ел-т стрілка вгору
+      let el2ScrollArrow = back.querySelector('.arrow_top'); // знаходимо ел-т стрілка вгору
       let top = 0;
       if (el2ScrollArrow) top = el2ScrollArrow.style.height;
       if (el2Scroll) el2Scroll.style.top = top; // початкове значення скролу після відображення
@@ -417,12 +417,8 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
       }
     }
   });
+
   } // setPortfolio
-
-
-
-
-
 
   // ==========================================================================================================================
             function setScroll(el, step = null, duration = 500, speed = 150, arrowCSS = {}, runnerBarCSS = {}) {
@@ -440,70 +436,60 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
 // ===========!!!!!!!!!!!!================
 // слідкувати за тим, щоб контент вміщувався в батьківський контейнер з overflow: hidden
 
-    function setRunnerGradient() { // повертає linear-gradient для смуги прокрутки відповідно поточній прокрутці
+    function getRunnerGradient() { // повертає linear-gradient для смуги прокрутки відповідно поточній прокрутці
       // reset();
-      let coord = Math.abs(parseInt(scroll.style.top));
-      let k = coord / (overflow) * 100;
+      let top = Math.abs(parseInt(scroll.style.top) - arrowHeight);
+      let k = top / (overflow + arrowHeight) * 100;
       k = +k.toFixed();
-      bar.style.background = `linear-gradient(to bottom, transparent 0%, transparent ${k-5}%, ${runnerBarColor} ${k}%, transparent ${k+5}%)`;
+      return `linear-gradient(to bottom, transparent 0%, transparent ${k-5}%, ${runnerBarColor} ${k}%, transparent ${k+5}%)`;
     }
 
     function reset () {
       viewArea = el.clientHeight; // розмір видимої частини
       fullArea = el.scrollHeight; // розмір повний
-      overflow = fullArea - viewArea + arrowHeight; // перевищення розміру
+      overflow = fullArea - viewArea; // розмір прокрутки
       if (!step) step = viewArea / 3; // зсув по кліку за замовчуванням
 
     }
 
     if (!el) return;
     
-    let arrowHeight;
-    let fullArea;
     let viewArea;
+    let fullArea;
     let overflow;
-
-    arrowHeight = 30; // висота кнопки вверх-вниз
-    if (arrowCSS.height && !isNaN(parseInt(arrowCSS.height))) arrowHeight = parseInt(arrowCSS.height); // привласнюємо значення висоти стрілок
-
-    el.style.paddingTop = 0;
-    el.style.paddingBottom = 0;
+    let arrowHeight;
 
     reset();
 
     if (overflow <= 0)  return;
 
+    arrowHeight = 30;
+    if (arrowCSS.height && !isNaN(parseInt(arrowCSS.height))) arrowHeight = parseInt(arrowCSS.height); // привласнюємо значення висоти стрілок
+    
     let scrollingTouch = false; // чи відбувається скрол-анімація по кліку
     let scrollingHover = false; // чи відбувається скрол-анімація по наведенню
     
     el.classList.add("explorer-scroll"); // додаєм клас
-    let html = el.innerHTML; // зберігаємо оригінальний контент
+    let html = el.innerHTML; // додаєм вкладені ел-ти
+    el.innerHTML = `<div class='explorer-scroll__block'>${html}</div>`;
     
     // додаєм стрілки
-    el.innerHTML = `
-    <div class='explorer-scroll__arrow explorer-scroll__arrow-top'><span>&#10148;</span></div>
-    <div class='explorer-scroll__block'>${html}</div>
-    <div class='explorer-scroll__arrow explorer-scroll__arrow-bottom'><span>&#10148;</span></div>
+    el.innerHTML += `
+    <div class='explorer-scroll__arrow arrow_top'><span>&#10148;</span></div>
+    <div class='explorer-scroll__arrow arrow_bottom'><span>&#10148;</span></div>
     <div class='explorer-scroll__bar'></div>
     `;
     
-    const up = el.querySelector(`.explorer-scroll__arrow-top`); // стрілки
+    const up = el.querySelector(`.arrow_top`); // стрілки
     const upArrow = up.firstChild;
-    const down = el.querySelector(`.explorer-scroll__arrow-bottom`);
+    const down = el.querySelector(`.arrow_bottom`);
     const downArrow = down.firstChild;
     const scroll = el.querySelector(`.explorer-scroll__block`); // блок, який переміщується
     const bar = el.querySelector('.explorer-scroll__bar');
-    
-    for (var key in el.style) {
-      scroll.style[key] = el.style[key];
-    }
-    
+
     // стилізація стрілок
-    el.style.display = 'block';
     up.style.height = arrowHeight + 'px';
     down.style.height = arrowHeight + 'px';
-    up.style.backgroundImage = `linear-gradient(to bottom, ${getComputedStyle(el).backgroundColor}, transparent)`;
-    down.style.backgroundImage = `linear-gradient(to top, ${getComputedStyle(el).backgroundColor}, transparent)`;
     if (arrowCSS.color) up.style.color = arrowCSS.color;
     if (arrowCSS.backgroundColor) up.style.backgroundImage = `linear-gradient(to bottom, ${arrowCSS.backgroundColor}, transparent)`;
     if (arrowCSS.background) up.style.background = arrowCSS.background;
@@ -513,11 +499,11 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
 
     // стилізація смуги прокрутки
     if (runnerBarCSS.width) bar.style.width = runnerBarCSS.width + 'px';
-    let runnerBarColor = getComputedStyle(el).color;
+    let runnerBarColor = 'black';
     if (runnerBarCSS.color) runnerBarColor = runnerBarCSS.color;
 
-    scroll.style.top = 0; // стартова позиція елементу scroll
-    setRunnerGradient(); // стартова позиція бігунця
+    scroll.style.top = arrowHeight + 'px';
+    bar.style.background = getRunnerGradient();;
 
   // обробники стрілок
     // ***************************************************************************************************************
@@ -527,9 +513,9 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
       event.stopPropagation();
       if (scrollingTouch || scrollingHover) return;
 
-      if (parseInt(scroll.style.top) >= 0) {
-        scroll.style.top = 0;
-        setRunnerGradient();
+      if (parseInt(scroll.style.top) >= arrowHeight) {
+        scroll.style.top = arrowHeight + 'px';
+        bar.style.background = getRunnerGradient();
         return;
       }
 
@@ -539,22 +525,22 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
       down.style.cursor = 'pointer';
       
       $(scroll).animate(
-        {top: 0}, 
+        {top: arrowHeight}, 
         {
-          duration: -parseInt(scroll.style.top) / speed * 1000,
+          duration: Math.abs(parseInt(scroll.style.top) - arrowHeight) / speed * 1000,
           complete: ()=>{
             scrollingHover = false; // кінець анімації по наведенню
             upArrow.style.opacity = .5;
             up.style.cursor = 'pointer';
           },
           step: function(){
-            setRunnerGradient();
+            bar.style.background = getRunnerGradient();
           }});
     }); // up.mouseover
 
     // ***************************************************************************************************************
     up.addEventListener('mouseleave', (event)=>{ 
-      setRunnerGradient();
+      
       event.stopPropagation();
       if (scrollingTouch) return;
       
@@ -582,11 +568,11 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
         scrollingTouch = false;
       }
 
-      let dy = - parseInt(scroll.style.top);
+      let dy = arrowHeight - parseInt(scroll.style.top);
       
       if (dy <= 0) {
-        scroll.style.top = 0;
-        setRunnerGradient();
+        scroll.style.top = arrowHeight +'px';
+        bar.style.background = getRunnerGradient();
         $(scroll).animate({top: '+=10px'}, 100).animate({top: '-=10px'}, 100);
         upArrow.style.opacity = .5;
         up.style.cursor = 'default';
@@ -601,7 +587,7 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
         {
           duration: duration,
           step: function() {
-            setRunnerGradient();
+            bar.style.background = getRunnerGradient();
           },
           complete: function () {
             downArrow.style.opacity = 1;
@@ -626,7 +612,7 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
 
       $(scroll).animate({top: `-${overflow}px`},
       {
-        duration: (overflow + parseInt(scroll.style.top)) / speed * 1000,
+        duration: (overflow + 2 * arrowHeight + (parseInt(scroll.style.top) - arrowHeight)) / speed * 1000,
         complete: function()
         {
           scrollingHover = false;
@@ -634,15 +620,15 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
           down.style.cursor = 'default';
         },
         step: function(){
-          setRunnerGradient();
+          bar.style.background = getRunnerGradient();
         }
       });
-      setRunnerGradient();
+      bar.style.background = getRunnerGradient();
     }); // down.mouseenter
     
     // ***************************************************************************************************************
     down.addEventListener('mouseleave', (event)=>{
-      setRunnerGradient();
+      
       event.stopPropagation();
       if (scrollingTouch) return;
       
@@ -670,9 +656,9 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
         scrollingTouch = false;
       }
 
-      let dy = overflow + parseInt(scroll.style.top);
+      let dy = overflow + parseInt(scroll.style.top) + arrowHeight;
       if (dy <= 0) {
-        scroll.style.top = -overflow + 'px';
+        scroll.style.top = -overflow - arrowHeight + 'px';
         $(scroll).animate({top: '-=10px'}, 100).animate({top: '+=10px'}, 100);
         downArrow.style.opacity = .5;
         down.style.cursor = 'default';
@@ -687,7 +673,7 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
         {
           duration: duration,
           step: function () {
-            setRunnerGradient();
+            bar.style.background = getRunnerGradient();
           },
           complete: function () {
             upArrow.style.opacity = 1;

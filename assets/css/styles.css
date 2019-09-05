@@ -131,7 +131,7 @@ body input, body textarea {
 }
 
 .flex-blocks .flex-blocks_3 {
-  width: 30%;
+  width: 32%;
 }
 
 @media (max-width: 1000px) {
@@ -742,6 +742,12 @@ footer .footer__content a {
   }
 }
 
+#biography {
+  height: 500px;
+  background-color: #ce92bc;
+  padding: 20px 10px;
+}
+
 .specialization {
   background-color: #ce92bc;
   height: 100%;
@@ -756,6 +762,11 @@ footer .footer__content a {
 
 .specialization .img img {
   height: 75px !important;
+}
+
+.specialization .specialization_h3 {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .about__education__img {

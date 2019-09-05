@@ -116,7 +116,7 @@
                     <p>
                         Консультації проводяться в Києві, в центрі міста, неподалік Софієвської площі.
                     </p>
-                    <div class='read-more' data-text='Детальніше ...'>
+                    <div class='read-more' data-text='Освіта, досвід, біографія ...'>
                         <div class='flex-blocks'>
                             <img class='about__education__img' src='assets/img/experience.png' alt='Консультації психолога в Києві. Досвід та освіта.'>
                             <ul class='about__education__text'>
@@ -126,31 +126,11 @@
                             </ul>
                         </div>
                         <div class="separator"></div>
-                        <p>
-                            Після закінчення школи на Полтавщині, я потрапила до великого мегаполісу. На завод, де здебільшого працювали ті, хто повернувся з місць позбавлення волі. Це були люди з різним мисленням, досвідом та прагненнями. Їх пізнання – моя перша сходинка до психології. Цей досвід породив мій інтерес до людей.
-                        </p>
-                        <div class="read-more" data-text="Моя біографія детальніше &#9660;">
+                        <div id="biography" class="read-more" data-text="Моя біографія &#9660;">
                             <p>
-                                Далі – університет, аспірантура, викладацька діяльність, додаткова освіта. Вивчення теорії культури, історії релігії, PR, історії мистецтва, психології культури. Як жили люди колись і тепер? Як вони мислили, що любили? Як переживали і справлялися зі своїми проблемами? Як мислять юристи, а як журналісти, фізики, і чим живе сучасна молодь, і через який життєвий досвід можна до них достукатись.
+                                Після закінчення школи на Полтавщині, я потрапила до великого мегаполісу. На завод, де здебільшого працювали ті, хто повернувся з місць позбавлення волі. Це були люди з різним мисленням, досвідом та прагненнями. Їх пізнання – моя перша сходинка до психології. Цей досвід породив мій інтерес до людей.
                             </p>
-                            <p>
-                                Якось один дуже мудрий викладач сказав мені: "Не можна вчити інших того, чого не вмієш сам". Я це прочитала так: "Шукай знання не через книги, а через свій досвід". Общини мусульман, християн, буддистів, ромів, афро-американців, арабів. Їх звичаї, релігійні погляди, страви, особливості спілкування. Досвід тренера з тайцзицюань, китайського майстра цигун.
-                            </p>
-                            <p>
-                                Зовсім інший світ - дитяча психологія. Десятки журналів з дитячої педагогіки й психології, навчання й консультації, відкриття своєї внутрішньої дитини, погляд на світ очима дитини чи підлітка – чергова моя сходинка.
-                            </p>
-                            <p>
-                                А далі була війна. Вона вибила з-під мене стільця, на якому я так зручно сиділа. Старі смисли втратили значимість. Тому... Магістратура з психології, велика кількість курсів і тренінгів по роботі з травмою, ПТСР, депресією, робота з військовими в зоні бойових дій, з цивільними, які були змушені втікати від війни, з ветеранами, в громадських організаціях.
-                            </p>
-                            <p>
-                                Війна навчила відділяти основне від другорядного. Робота з наслідками війни – ще одна сходинка для мене, тепер уже як психолога.
-                            </p>
-                            <p>
-                                Робота з людьми, що потребують допомоги, передбачає створення безпечної атмосфери, і найперше - це родина. Потреби роботи з родиною привела мене в сімейну медіацію. Чергова сходинка - ненасильницьке спілкування, робота з навичками чути себе та іншого.
-                            </p>
-                            <p>
-                                Весь мій життєвий шлях - це розуміння людини як надзвичайно складної системи. Здійснюючи супровід, важливо враховувати всі складові - психічні та фізіологічні особливості, життєвий шлях, потреби, смисли, рівень опірності до стресів, культурні та релігійні відмінності.
-                            </p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur saepe odit, velit sint explicabo ad aliquid a corporis illum natus facilis molestias quia quis cumque sit facere, excepturi quae hic temporibus doloremque asperiores. Expedita esse reprehenderit aspernatur cumque odio sed a in qui enim blanditiis accusantium repellendus perspiciatis, debitis explicabo cum neque impedit quo ipsam officia? Accusamus, laudantium fuga non quibusdam ratione, explicabo cum, libero sapiente soluta enim velit debitis aperiam consequatur? Ea, inventore ad? Hic sit doloremque aliquam, veritatis aspernatur fugiat recusandae neque, totam eum officiis magni similique cumque dolore eaque quae quibusdam at. Rem perspiciatis provident laudantium. Voluptate voluptatum dignissimos laborum! Asperiores illo quo quas id suscipit velit sed placeat distinctio adipisci ipsam culpa hic voluptates consequuntur fugiat provident, tempore aliquid rem odio nihil. Consequatur ducimus illo, exercitationem provident molestias aperiam quas fugit quam quasi ratione adipisci eligendi dignissimos quo, odio voluptatem. Dolorem reiciendis qui voluptatem cumque, recusandae inventore doloribus officia repellat numquam accusamus pariatur. Maxime architecto inventore veniam quia vel quaerat in, quo, voluptate repellendus iste, sit atque impedit </p>
                         </div> <!-- read more -->
                     </div>
                 </div>
@@ -205,7 +185,7 @@
             <div class="main__module__content full-width">
 
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae doloremque libero architecto sed voluptatem incidunt veniam neque provident aperiam?
+                Трапляється, що буває складно відповісти на безліч питаннь. З приводу власних почуттів. З приводу того, що турбує. Як сприймати інших та як сприймають тебе. Чого насправді хочеться та чого бракує.
             </p>
 
             <div class='flex-blocks'>
@@ -223,14 +203,16 @@
                 </div>
                 <div class='flex-blocks_3 specialization'>
                     <div class='img'><img src='assets/img/head2.png' alt='Допомога психолога. Київ.'></div>
-                    <h2>Специализация 2</h2>
+                    <h2>Сімейна терапія</h2>
+                    <h3 class='specialization_h3'>- допоможе тим, хто переживає незадоволення, зраду, відчуженість, сварки, відмінність у поглядах на цінності, виховання, побут.</h3>
                     <ul>
-                        <li class='action'>Проблема 2.1</li>
-                        <li class='action'>Проблема 2.2</li>
-                        <li class='action'>Проблема 2.3</li>
-                        <li class='action'>Проблема 2.4</li>
-                        <li class='action'>Проблема 2.5</li>
-                        <li class='action'>Проблема 2.6</li>
+                        <li>&#183; Переживемо складні кризові моменти сіменого життя</li>
+                        <li>&#183; Налагодимо сімейні стосунки  різних поколінь</li>
+                        <li>&#183; Вирішимо труднощі стосунків у парах, зокрема в подружжях з великою різницею у віці, нестандартних сім'ях</li>
+                        <li>&#183; Подолаємо труднощі у взаємодії з дітьми</li>
+                        <li>&#183; Вибудуємо гендерні ролі</li>
+                        <li>&#183; Станемо почутими</li>
+                        <li>&#183; Прояснимо потреби власні та партнера</li>
                     </ul>
                 </div>
                 <div class='flex-blocks_3 specialization'>
@@ -458,6 +440,8 @@ window.onscroll = ()=>{
 
         }
 // ---------------------------------------------------------------------------------- кінець шаблону сайту
+setScroll(document.querySelector('#biography'), undefined, undefined, undefined, {backgroundColor: '#ce92bc', height: '50px'});
+
 let email_form = [
         {"class":"quession_common", "subject":"Питання психологу", "message":"Добрий день. Потрібна Ваша допомога. Зв'яжіться, будь ласка, зі мною."},
         {"class":"quession_personal", "subject":"Індивідуальна терапія", "message":"Добрий день. У мене питання з приводу индивідуальних консультацій. Зв'яжіться, будь ласка, зі мною."},

@@ -154,7 +154,7 @@ body {
     } // no-wrap
 
     .flex-blocks_3 {
-        width: 30%;
+        width: 32%;
         @media (max-width: $md) {
             width: 100%;
         }
@@ -637,18 +637,31 @@ footer {
     } // about__text
 }
 
+#biography {
+    height: 500px;
+    background-color: $body_bgc_finish;
+    padding: 20px 10px;
+}
+
 .specialization {
     background-color: $body_bgc_finish;
     height: 100%;
     padding: 10px;
     text-align: center;
     margin-bottom: 20px;
+
     .img {
         text-align: center;
         img {
             height: 75px!important;
         }
     }
+    
+    .specialization_h3 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
 }
 
 .about__education__img {
