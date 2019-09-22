@@ -125,6 +125,12 @@ body input, body textarea {
           align-items: center;
 }
 
+.flex-blocks.full-height {
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
 .flex-blocks.no-wrap {
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
@@ -676,7 +682,7 @@ footer .footer__content a {
   }
 }
 
-.action-button.quickly {
+.action-button.quession_quickly {
   background: -webkit-gradient(linear, left top, left bottom, from(#bbb6b6), to(red));
   background: linear-gradient(to bottom, #bbb6b6, red);
   color: inherit;
@@ -688,7 +694,7 @@ footer .footer__content a {
 }
 
 @media (max-width: 800px) {
-  .action-button.quickly {
+  .action-button.quession_quickly {
     width: 40%;
     height: 80px;
   }
@@ -755,7 +761,6 @@ footer .footer__content a {
 
 .specialization {
   background-color: #ce92bc;
-  height: 1170px;
   padding: 10px;
   text-align: center;
   margin-bottom: 20px;

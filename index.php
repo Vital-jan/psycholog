@@ -45,11 +45,10 @@
             // створюємо головне меню
                 $n = 0;
                 foreach($main_menu as $key=>$value) {
-                    $id = ($value['id']) ? $value['id'] : "module{$n}";
                     $n++;
                     if ($value['menu_item'])
                     echo "
-                    <span class='nav__elem action' data-id='{$id}'>{$value['menu_item']}</span>
+                    <span><a class='nav__elem action' href='#{$value['id']}'>{$value['menu_item']}</a></span>
                     ";
                 }
             // створюємо смарт-меню
@@ -67,9 +66,11 @@
                     $id = $value['id'];
                     if ($value['menu_item'])
                     echo "
-                    <li class='nav__smartmenu__elem' data-id='{$id}'>
+                    <a href='#{$value['id']}'>
+                    <li class='nav__smartmenu__elem'>
                     {$value['menu_item']}
                     </li>
+                    </a>
                     {$separate}
                     ";
                 }
@@ -97,7 +98,7 @@
 
                 <div class='about__text flex-blocks'>
                     <p >
-                        <span>Психолог. Психотерапевт. Травмтерапевт. Арт-терапевт. Сімейний медіатор.</span>
+                        <span>Психолог. Психотерапевт. Травмотерапевт. Арт-терапевт. Сімейний медіатор.</span>
                     </p>
                     <p class='flex-blocks'>
                         <span>Штатний психолог в &laquo;Pizza Veterano&raquo;</span> <span style = "margin-left: 30px"><a class="no-underline" href="https://kyiv.veteranopizza.com/" rel="nofollow" target="blanc"><img src="assets/img/veterano.jpg" alt="Психолог veterano pizza"></a></span>
@@ -216,7 +217,7 @@
                 Трапляється, що буває складно відповісти на безліч питаннь. З приводу власних почуттів. З приводу того, що турбує. Як сприймати інших та як сприймають тебе. Чого насправді хочеться та чого бракує.
             </p>
 
-            <div class='flex-blocks'>
+            <div class='flex-blocks full-height'>
                 <div class='flex-blocks_3 specialization'>
                 <div class='img'><img src='assets/img/head1.png' alt='Допомога психолога. Київ.'></div>
                 <h2>Особистісне зростання</h2>
@@ -298,9 +299,16 @@
                     </span>
                 </p>
                 <p class='flex-blocks justify-blocks service quession quession_group' id='service-group'>
-                    <span class='service_description'>Групові та корпоративні психологічні тренінги</span>
+                    <span class='service_description'>Групові психологічні тренінги</span>
                     <span class="service__item">
-                        <img src='assets/img/human.png' alt='Групові та корпоративні психологічні тренінги'>
+                        <img src='assets/img/human.png' alt='Групові психологічні тренінги'>
+                        <span>500 грн</span>
+                    </span>
+                </p>
+                <p class='flex-blocks justify-blocks service quession quession_group' id='service-group'>
+                    <span class='service_description'>Корпоративні психологічні тренінги</span>
+                    <span class="service__item">
+                        <img src='assets/img/corporate.png' alt='Корпоративні психологічні тренінги'>
                         <span>от 2000 грн</span>
                     </span>
                 </p>
@@ -308,7 +316,7 @@
                     <span class='service_description'>Для тих, хто далеко від Києва, психотерапевт надає онлайн консультації в skype.</span>
                     <span class="service__item" >
                         <img src='assets/img/skype-img.png' alt='Онлайн консультації психолога'>
-                        <span>300 грн</span>
+                        <span>600 грн</span>
                     </span>
                 </p>
             </div>
@@ -365,7 +373,7 @@
         let homeArrow = document.querySelector('#home-arrow');
         let homeArrowY = parseInt(getComputedStyle(homeArrow).bottom);
         let homeArrowVisible = false;
-        let currentNavElement = document.querySelector('.nav__elem');
+        // let currentNavElement = document.querySelector('.nav__elem');
 
         document.querySelectorAll('.read-more').forEach((i)=>{ // створюємо кнопки "Read more" для всіх елементів з відповідним класом
             let btn = document.createElement('button');
@@ -377,18 +385,19 @@
             if (i.dataset.text) btn.innerHTML = i.dataset.text;
         })
 
-        document.addEventListener('click', (event)=>{ // клік по Read more - розгортання
+        document.addEventListener('click', (event)=>{ // глобальний обробник
         let el = event.target;
-            if (el.dataset.readmore) {
+
+            if (el.dataset.readmore) { // клік по Read more - розгортання
                 $(el.previousElementSibling).animate({maxHeight: 10000}, 1000);
                 el.style.display = 'none';
             }
-
-            if (el.matches('a')) {
-                if (!el.id) return;
-                if (el.id.charAt(0) != '#') return;
-                moduleView(el.getAttribute('href'));
+            if (el.tagName == 'A') { // обробник кліків посилань-якорів
+                let link = el.getAttribute('href');
+                if (!link) return;
+                if (link.charAt(0) != '#') return;
                 event.preventDefault();
+                moduleView(el.getAttribute('href'));
             }
         })
 
@@ -404,38 +413,42 @@
             })
 
         function moduleView(id, navItem) { // скролить вікно та показує обраний в меню модуль сайту
-            let prefix = '#';
-            if (id.charAt(0) == '#') prefix = '';
+            let prefix = (id.charAt(0) == '#') ? '' : '#';
             let target = document.querySelector(`${prefix}${id}`);
             let y1 = target.getBoundingClientRect().y;
             let y2 = parseInt(getComputedStyle(nav).height) + 100;
-            let dy = y2 - y1;
-            let delay = 1000/Math.abs(dy);
-            let steps = 40;
-            let n = 1;
-            let offset = 0;
-            let scrolled = false;
-            let interval = setInterval (()=>{
-                if (n >= steps) {
-                    clearInterval(interval);
-                    if (navItem) setTimeout(()=>{navItem.classList.add('nav__elem_active')}, 500);
-                    if (!scrolled) $(`#${id}`).fadeTo(100, .5).fadeTo(200, 1);
-                    return;
-                }
-                n++;
-                offset = target.getBoundingClientRect().y;
-                window.scrollBy(0, -dy/steps);
-                offset -= target.getBoundingClientRect().y;
-                if (offset != 0) scrolled = true;
-                if (offset == 0) n = steps;
-            }, 10);
+            let dy = y1 - y2;
+            if (dy < 0) {dy = '-=' + Math.abs(dy)} else
+            if (dy > 0) dy = '+=' + dy;
+            let steps = 0;
+            if (dy) $('html').animate({scrollTop: dy}, {step: ()=>{steps++}}, 1000);
+            if (steps <= 1) $(target).fadeTo(100, .5).fadeTo(200, 1);
+            // let delay = 1000/Math.abs(dy);
+            // let steps = 40;
+            // let n = 1;
+            // let offset = 0;
+            // let scrolled = false;
+            // let interval = setInterval (()=>{
+            //     if (n >= steps) {
+            //         clearInterval(interval);
+            //         // if (navItem) setTimeout(()=>{navItem.classList.add('nav__elem_active')}, 500);
+            //         if (!scrolled) $(`#${id}`).fadeTo(100, .5).fadeTo(200, 1);
+            //         return;
+            //     }
+            //     n++;
+            //     offset = target.getBoundingClientRect().y;
+            //     window.scrollBy(0, -dy/steps);
+            //     offset -= target.getBoundingClientRect().y;
+            //     if (offset != 0) scrolled = true;
+            //     if (offset == 0) n = steps;
+            // }, 10);
         }
 
         nav.addEventListener('click',(event)=>{ // обробник кліку панелі навігації
             if (event.target.dataset.id) {
-                if (currentNavElement) currentNavElement.classList.remove('nav__elem_active');
-                currentNavElement = event.target;
-                moduleView(event.target.dataset.id, currentNavElement);
+                // if (currentNavElement) currentNavElement.classList.remove('nav__elem_active');
+                // currentNavElement = event.target;
+                moduleView(event.target.dataset.id/* , currentNavElement */);
         }
         });
 
@@ -462,9 +475,9 @@
         })
 
         homeArrow.addEventListener('click', ()=>{ // клік кнопки "додому" - повернення до 1-го ел-ту класу main__module
-            currentNavElement.classList.remove('nav__elem_active');
-            currentNavElement = document.querySelector('.nav__elem');
-            moduleView(document.querySelector('.main__module').getAttribute('id'), currentNavElement);
+            // currentNavElement.classList.remove('nav__elem_active');
+            // currentNavElement = document.querySelector('.nav__elem');
+            moduleView(document.querySelector('.main__module').getAttribute('id')/* , currentNavElement */);
         })
 
 window.onscroll = ()=>{
@@ -483,7 +496,7 @@ window.onscroll = ()=>{
                 homeArrow.classList.add('hidden-elem');
                 homeArrowVisible = false;
                 };
-            if (currentNavElement) currentNavElement.classList.remove('nav__elem_active');
+            // if (currentNavElement) currentNavElement.classList.remove('nav__elem_active');
 
         }
 // ---------------------------------------------------------------------------------- кінець шаблону сайту
@@ -512,7 +525,7 @@ document.addEventListener('click', (event)=>{
             if (el.classList.contains(i.class)) {
                 modalWindow(
                     'Дякую, що звернулись!',
-                    `Ваше повідомлення буде надіслано мені на email. Я відповім Вам найближчим часом.
+                    `Ваше повідомлення буде надіслано мені на email та телеграм. Я відповім Вам найближчим часом.
                     <form name='mail' class='explorer-form'>
                         <input name='username' class='input_text' type='text' placeholder='Ваше им&apos;я'>
                         <input name='useremail' class='input_text' type='text' placeholder='Ваш email'>
