@@ -107,7 +107,7 @@
                         Починаючи з 2015 року - приватна психотерапевтична практика.
                     </p>
                     <p class='think'>
-                        ... Весь мій життєвий шлях - це розуміння людини, як надзвичайно складної системи. Здійснюючи супровід, важливо враховувати всі складові - психічні та фізіологічні особливості, життєвий шлях, потреби, смисли, рівень опірності до стресів, культурні та релігійні відмінності.
+                        ... Весь мій життєвий шлях - це розуміння людини, як надзвичайно складної системи. Здійснюючи супровід, важливо враховувати всі складові - психічні та фізіологічні особливості, життя, потреби, смисли, рівень опірності до стресів, культурні та релігійні відмінності.
                     </p>
                 </div>
                 <div>
@@ -118,13 +118,12 @@
                         Консультації проводяться в Києві, в центрі міста, неподалік Софієвської площі.
                     </p>
                     <div class='read-more' data-text='Освіта, досвід, біографія ...'>
-                        <div class='flex-blocks'>
-                            <img class='about__education__img' src='assets/img/experience.png' alt='Консультації психолога в Києві. Досвід та освіта.'>
-                            <ul class='about__education__text'>
-                                <li>Український центр медіації та НГО "Родина Кольпінга". Медіатор, сімейний медіатор. </li>
-                                <li>Regent University (Virginia Beach, USA, 2019) Травмотерапевт.</li>
-                                <li>МЕГІ, Intrnational Education Cociety (2016) Магістратура, спеціальність: психолог.</li>
-                                <li>Донецький державний університет (1996) Кандидат філологічних наук, доцент кафедри української філології і культури.</li>
+                        <div>
+                            <ul class='education'>
+                                <li><img src='assets/img/experience.png'><span class='about__education__text'>Український центр медіації та НГО "Родина Кольпінга". Медіатор, сімейний медіатор.</span>  </li>
+                                <li><img src='assets/img/experience.png'><span class='about__education__text'>Regent University (Virginia Beach, USA, 2019) Травмотерапевт.</span></li>
+                                <li><img src='assets/img/experience.png'><span class='about__education__text'>МЕГІ, Intrnational Education Cociety (2016) Магістратура, спеціальність: психолог.</span></li>
+                                <li><img src='assets/img/experience.png'><span class='about__education__text'>Донецький державний університет (1996) Кандидат філологічних наук, доцент кафедри української філології і культури.</span></li>
                             </ul>
                         </div>
                         <div class="separator"></div>
@@ -262,7 +261,7 @@
                         <li>&#183; розладами настрою</li>
                         <li>&#183; соматичними (тілесними) розладами</li>
                         <li>&#183; панічними атаками</li>
-                        <li>&#183; порушенням адаптації, пов'язаним зі складною ситуацією тощо</li>
+                        <li>&#183; порушенням адаптації, пов'язаним зі складною ситуацією.</li>
                         <li>&nbsp;</li>
                         <li>Освоїмо опанування почуттів, емоцій та станів (злість, провина, агресивність, безпорадність, відчуженість байдужість, самотність прив'язаність, нав'язливі думки.</li>
                         <li>Вибудуємо поведінку в ситуаціях емоційного і фізичного насилля.</li>
@@ -327,9 +326,17 @@
                 Відгуки та рекомендації
             </div>
             <div class="main__module__content flex-blocks">
-            <a class="flex-blocks no-underline" href="https://www.facebook.com/duchess8/posts/2539330026110442" rel="nofollow" target="blanc">
+            <a class="flex-blocks no-underline" href="https://www.facebook.com/photo.php?fbid=2539326189444159&set=a.298455810197886&type=3&theater" rel="nofollow" target="blanc">
             <img class="img-round" src="assets/img/olga.jpg" alt="">
                 <span>Ольга Лєбєдєва</span>
+            </a>
+            <a class="flex-blocks no-underline" href="https://www.facebook.com/photo.php?fbid=744042376018545&set=a.109080772848045&type=3&theater" rel="nofollow" target="blanc">
+            <img class="img-round" src="assets/img/stefany.jpg" alt="">
+                <span>Стефанія Іоффе</span>
+            </a>
+            <a class="flex-blocks no-underline" href="https://www.facebook.com/photo.php?fbid=935166060200324&set=a.830297564020508&type=3&theater" rel="nofollow" target="blanc">
+            <img class="img-round" src="assets/img/tetiana.jpg" alt="">
+                <span>Тетяна Ільченко</span>
             </a>
             </div>
             <div class="main__module__content">
@@ -373,7 +380,6 @@
         let homeArrow = document.querySelector('#home-arrow');
         let homeArrowY = parseInt(getComputedStyle(homeArrow).bottom);
         let homeArrowVisible = false;
-        // let currentNavElement = document.querySelector('.nav__elem');
 
         document.querySelectorAll('.read-more').forEach((i)=>{ // створюємо кнопки "Read more" для всіх елементів з відповідним класом
             let btn = document.createElement('button');
@@ -383,22 +389,6 @@
             btn.setAttribute('data-readmore','true');
             btn.innerHTML = 'Read more ...';
             if (i.dataset.text) btn.innerHTML = i.dataset.text;
-        })
-
-        document.addEventListener('click', (event)=>{ // глобальний обробник
-        let el = event.target;
-
-            if (el.dataset.readmore) { // клік по Read more - розгортання
-                $(el.previousElementSibling).animate({maxHeight: 10000}, 1000);
-                el.style.display = 'none';
-            }
-            if (el.tagName == 'A') { // обробник кліків посилань-якорів
-                let link = el.getAttribute('href');
-                if (!link) return;
-                if (link.charAt(0) != '#') return;
-                event.preventDefault();
-                moduleView(el.getAttribute('href'));
-            }
         })
 
         let navButton = document.createElement('span'); // створюємо кнопку меню-смартфон
@@ -411,6 +401,24 @@
             $(smartMenu).show(100);
             smartMenu.classList.add('nav__smartmenu_active');
             })
+
+        document.addEventListener('click', (event)=>{ // глобальний обробник
+        let el = event.target;
+
+            if (el.dataset.readmore) { // клік по Read more - розгортання
+                $(el.previousElementSibling).animate({maxHeight: 10000}, 1000);
+                el.style.display = 'none';
+            }
+
+            let aTag =  el.closest('a');
+            if (aTag) { // обробник кліків посилань-якорів
+                let link = aTag.getAttribute('href');
+                if (!link) return;
+                if (link.charAt(0) != '#') return;
+                event.preventDefault();
+                moduleView(link);
+            }
+        })
 
         function moduleView(id, navItem) { // скролить вікно та показує обраний в меню модуль сайту
             let prefix = (id.charAt(0) == '#') ? '' : '#';
@@ -445,11 +453,8 @@
         }
 
         nav.addEventListener('click',(event)=>{ // обробник кліку панелі навігації
-            if (event.target.dataset.id) {
-                // if (currentNavElement) currentNavElement.classList.remove('nav__elem_active');
-                // currentNavElement = event.target;
-                moduleView(event.target.dataset.id/* , currentNavElement */);
-        }
+            if (event.target.dataset.id) 
+                moduleView(event.target.dataset.id);
         });
 
         smartMenu.addEventListener('mouseleave', (event)=>{ // закриття smartmenu
@@ -458,16 +463,9 @@
         });
 
         smartMenu.addEventListener('click', (event)=>{ // клік по ел-ту smartmenu
-            event.stopPropagation();
-            if (event.target.dataset.id) {
+            // event.stopPropagation();
                 $(smartMenu).hide(100);
                 smartMenu.classList.remove('nav__smartmenu_active');
-                moduleView(event.target.dataset.id);
-            }
-            if (event.target.id == 'nav-smart-menu-close') {
-                $(smartMenu).hide(100);
-                smartMenu.classList.remove('nav__smartmenu_active');
-            }
         });
 
         homeArrow.addEventListener('mouseenter', (event)=>{ // анімація кнопки "додому"
@@ -475,9 +473,7 @@
         })
 
         homeArrow.addEventListener('click', ()=>{ // клік кнопки "додому" - повернення до 1-го ел-ту класу main__module
-            // currentNavElement.classList.remove('nav__elem_active');
-            // currentNavElement = document.querySelector('.nav__elem');
-            moduleView(document.querySelector('.main__module').getAttribute('id')/* , currentNavElement */);
+            moduleView(document.querySelector('.main__module').getAttribute('id'));
         })
 
 window.onscroll = ()=>{
@@ -496,10 +492,10 @@ window.onscroll = ()=>{
                 homeArrow.classList.add('hidden-elem');
                 homeArrowVisible = false;
                 };
-            // if (currentNavElement) currentNavElement.classList.remove('nav__elem_active');
-
         }
+
 // ---------------------------------------------------------------------------------- кінець шаблону сайту
+
 setScroll(document.querySelector('#biography'), undefined, undefined, undefined, {backgroundColor: '#ce92bc', height: '50px'});
 
 let email_form = [
@@ -547,14 +543,19 @@ document.addEventListener('click', (event)=>{
                         if (form.useremail.value.length < 7 && form.userphone.value.length < 7)
                             {explorerPopUp("Щоб психолог міг з Вами зв'язатись, зазначте Ваш телефон або email.");}
                         else
-                        { // отправка email
+                        { // надсилання email
                             sendMail ('kravchenko.galina@outlook.com', form.subj,
                                 'Від кого: ' + form.username.value + '\n' + 'email: ' + form.useremail.value + '\n' + 'Телефон: ' + form.userphone.value + '\n' + form.usermsg.value + '\n', 'psycholog.net.ua', (response)=>{
                                     if (response.send) {
-                                        explorerPopUp(`Ваше повідомлення надіслано на мій email. Я обов'язково зв'яжусь з Вами за першої можливості.`);
+                                        explorerPopUp(`Ваше повідомлення надіслано на мій email. Я обов'язково зв'яжусь з Вами за першої можливості. Якщо я не відповідаю, перевірте Ваші контактні дані та надішліть повідомлення ще раз.`);
                                         closeWindow('send-mail');
                                     }
                                 }, 'assets/ajax/');
+                            // надсилання в телеграм
+                            ajax(form.subj + "%0AВід кого: " + form.username.value + "%0aemail: " + form.useremail.value + "%0aТелефон: " + form.userphone.value + "%0a" + form.usermsg.value, (response)=>{
+                                if (response && response.ok) explorerPopUp(`Ваше повідомлення надіслано мені на telegram. Я обов'язково зв'яжусь з Вами за першої можливості. Якщо я не відповідаю, перевірте Ваші контактні дані та надішліть повідомлення ще раз.`);
+                            },'api.php',"");
+
                         }
                     }, undefined, 0, 'send-mail'
                 ) // modalwindow

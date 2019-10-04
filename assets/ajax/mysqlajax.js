@@ -36,7 +36,7 @@ function ajax(query, action, file, phpPath=''){
 // -------------------------------------------------
   let data = new FormData;
   data.append('body', query);
-  if (phpPath.length > 0) phpPath += '/';
+  if (phpPath.length > 0 && phpPath.charAt(phpPath.length-1) != '/') phpPath += '/';
   phpPath += file;
 
   fetch(phpPath, {
@@ -52,6 +52,38 @@ function ajax(query, action, file, phpPath=''){
            }
       })
       .then(action)
+      .catch(function(error) {
+          alert('Error in mysqlajax.js (function ajax)' + error)
+      });
+  } // function
+
+// -------------------------------------------------
+function getText(file, action){
+  // возвращает содержимое файла в виде текста
+// -------------------------------------------------
+
+//   fetch(file).then((response)=> {
+//     response.text().then(function(text) {
+//       console.log(text);
+//     });
+//   });
+  
+
+  fetch(file) 
+      .then((response) => {
+        if (response.status == 200) 
+            {
+                console.log(response) // удачный ajax запрос
+                response.text().then((text)=>{
+                    action(text);
+                })
+            }
+        else 
+            {
+                console.log(response.status) // неудачный ajax запрос
+            }
+        }
+    )
       .catch(function(error) {
           alert('Error in mysqlajax.js (function ajax)' + error)
       });

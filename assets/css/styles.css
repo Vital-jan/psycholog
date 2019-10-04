@@ -125,6 +125,12 @@ body input, body textarea {
           align-items: center;
 }
 
+.flex-blocks.vertical-align {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .flex-blocks.full-height {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
@@ -780,11 +786,26 @@ footer .footer__content a {
 }
 
 .about__education__img {
-  width: 15%;
+  width: 50px;
 }
 
 .about__education__text {
   width: 80%;
+}
+
+.education li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.education img {
+  width: 70px;
 }
 
 .list-marker {

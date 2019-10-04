@@ -253,6 +253,8 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
   
   let productWidth; // поточна ширина ел-ту портфоліо
   let margin = minMargin; // поточний margin
+  let displayWidth = getBoundingClientRect(body);
+  console.log(displayWidth)
 
 
   const left = document.querySelector(`#${id} .explorer-portfolio__arrow.left`); // стрілки вліво-право
@@ -439,6 +441,11 @@ function setPortfolio (id, width = 300, minMargin = 10, height = 400) {
     // якщо весь контент вміщується в контейнер, кнопки не відображаються та ніяких дій не відбувається.
 // ===========!!!!!!!!!!!!================
 // слідкувати за тим, щоб контент вміщувався в батьківський контейнер з overflow: hidden
+// як стилізувати:
+// .explorer-scroll__arrow {
+// z-index: 1;
+// height: 30px;
+// background-color: #fff;
 
     function setRunnerGradient() { // повертає linear-gradient для смуги прокрутки відповідно поточній прокрутці
       // reset();
